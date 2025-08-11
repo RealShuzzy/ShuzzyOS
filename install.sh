@@ -62,16 +62,15 @@ response=$?
 
 [ "$response" -eq 1 ] && cancel_install
     
-
-
-#------------------------------------------
 clear
-echo -e "You have selected:
-    Packages: $choices_packages
-    Drivers: $choices_drivers"
-echo "Installing packages..."
-
 #------------------------------------------
+
+# Check if multilib is enabled
+if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+    echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+else
+    sed -i '/^\[multilib\]/,/^Include = \/etc\/pacman.d\/mirrorlist/ s/^#//' /etc/pacman.conf
+fi
 
 # Needed installs
 sudo pacman -Syu --needed --noconfirm > /dev/null
@@ -81,12 +80,34 @@ sudo pacman -S --needed --noconfirm git > /dev/null
 # Cloning GitHub Repository.
 git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
 
-# Get needed packages from choices
+# Seperate choices into arrays
 read -r -a pkg_array <<< "$choices_packages"
-for pkg in "${pkg_array[@]}"; do
-    echo "$pkg"
+read -r -a driver_array <<< "$choices_drivers"
+
+# Add drivers to choice
+for driver in "${driver_array[@]}"; do
+    [[ "$driver" == "pipewire" ]] && driver_array+=("pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber")
+    [[ "$driver" == "nvidia" ]] && driver_array+=("nvidia-utils" "nvidia-settings")
+    [[ "$driver" == "amd" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
 done
 
+# Filter out "amd" since its not a package
+filtered=()
+for elem in "${driver_array[@]}"; do
+  if [[ "$elem" != "amd" ]]; then
+    filtered+=("$elem")
+  fi
+done
+driver_array=("${filtered[@]}")
+
+# Debug print
+for pkg in "${pkg_array[@]}"; do
+    sudo pacman -S --needed --noconfirm "$pkg" > /dev/null
+done
+
+for driver in "${driver_array[@]}"; do
+    sudo pacman -S --needed --noconfirm "$driver" > /dev/null
+done
 
 # Selected installs
 
