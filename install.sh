@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Functions
+cancel_install()
+{
+    clear
+    echo "The installation of ShuzzyOS was cancelled."
+    kill $KEEPALIVE_PID
+    exit 0
+}
+
 #--------------------START------------------
 sudo -v
 while true; do sudo -v; sleep 60; done &
@@ -22,12 +31,7 @@ fi
 dialog --title "ShuzzyOS" --yesno "Welcome to the ShuzzyOS installer for Archlinux.\n  Would you like to continue with the install?" 6 52
 response=$?
 
-if [ $response -eq 1 ]; then
-    clear
-    echo "The installation of ShuzzyOS was cancelled."
-    kill $KEEPALIVE_PID
-    exit 0
-fi
+[ "$response" -eq 1 ] && cancel_install
 
 # Select packages
 choices_packages=$(dialog --stdout --checklist "Select packages you wish to install." 18 50 5 \
@@ -45,12 +49,7 @@ choices_packages=$(dialog --stdout --checklist "Select packages you wish to inst
 
 response=$?
 
-if [ $response -eq 1 ]; then
-    clear
-    echo "The installation of ShuzzyOS was cancelled."
-    kill $KEEPALIVE_PID
-    exit 0
-fi
+[ "$response" -eq 1 ] && cancel_install
 
 # Select drivers
 choices_drivers=$(dialog --stdout --checklist "Select additional packages you wish to install." 12 50 5 \
@@ -59,14 +58,11 @@ choices_drivers=$(dialog --stdout --checklist "Select additional packages you wi
     nvidia "NVIDIA graphic drivers" off \
     amd "AMD graphic drivers" off)
 
-response=?
+response=$?
 
-if [ $response -eq 1 ]; then
-    clear
-    echo "The installation of ShuzzyOS was cancelled."
-    kill $KEEPALIVE_PID
-    exit 0
-fi
+[ "$response" -eq 1 ] && cancel_install
+    
+
 
 #------------------------------------------
 clear
@@ -84,6 +80,12 @@ sudo pacman -S --needed --noconfirm git > /dev/null
 
 # Cloning GitHub Repository.
 git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
+
+# Get needed packages from choices
+read -r -a pkg_array <<< "$choices_packages"
+for pkg in "${pkg_array[@]}"; do
+    echo "$pkg"
+done
 
 
 # Selected installs
