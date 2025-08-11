@@ -83,7 +83,7 @@ sudo pacman -S --needed --noconfirm hyprland > /dev/null
 sudo pacman -S --needed --noconfirm git > /dev/null
 
 # Cloning GitHub Repository.
-
+git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
 
 
 # Selected installs
