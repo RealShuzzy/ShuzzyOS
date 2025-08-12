@@ -77,6 +77,7 @@ fi
 sudo pacman -Syu --needed --noconfirm > /dev/null
 sudo pacman -S --needed --noconfirm hyprland > /dev/null
 sudo pacman -S --needed --noconfirm git > /dev/null
+sudo pacman -S --needed --noconfirm rsync > /dev/null
 
 # Cloning GitHub Repository.
 git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
@@ -115,7 +116,7 @@ done
 
 #--------------------------------------------
 #Editing Configs
-sudo cp -rf ~/.ShuzzyOS/assets/ ~/.config/
+sudo rsync -rf ~/.ShuzzyOS/assets/ ~/.config/
 
 # Start hyprland
 hyprland
