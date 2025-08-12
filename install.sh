@@ -115,8 +115,8 @@ done
 
 #--------------------------------------------
 #Editing Configs
-
-sudo cp -rf ~/.ShuzzyOS/assets/ ~/.config/
+sudo mkdir ~.config2
+sudo cp -rf ~/.ShuzzyOS/assets/ ~/.config2/
 
 #getmonitors
 monitors=""
