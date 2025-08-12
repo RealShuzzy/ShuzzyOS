@@ -118,6 +118,10 @@ done
 sudo mkdir ~.config2
 sudo cp -rf ~/.ShuzzyOS/assets/ ~/.config2/
 
+# Start hyprland
+hyprland
+sleep 10
+
 #getmonitors
 monitors=""
 
@@ -133,7 +137,7 @@ while IFS= read -r line; do
 done < <(hyprctl monitors)
 #
 for monitor in "${monitors[@]}"; do
-    echo $monitor >> ~/.config2/hypr/test.conf
+    sudo echo $monitor >> ~/.config2/hypr/test.conf
 done
 
 #--------------------EXIT------------------
