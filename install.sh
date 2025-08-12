@@ -116,11 +116,14 @@ done
 
 #--------------------------------------------
 #Editing Configs
-sudo rsync -rf ~/.ShuzzyOS/assets/ ~/.config/
+rsync -r ~/.ShuzzyOS/config/ ~/.config/
+mkdir -p ~/pictures/wallpaper
+rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 # Start hyprland
 hyprland
-sleep 10
+hyprctl monitors
+
 
 #getmonitors
 monitors=""
