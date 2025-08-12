@@ -91,7 +91,7 @@ for driver in "${driver_array[@]}"; do
     [[ "$driver" == "pipewire" ]] && driver_array+=("pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber")
     [[ "$driver" == "nvidia" ]] && driver_array+=("nvidia-utils" "nvidia-settings")
     [[ "$driver" == "amd" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
-    [[ "$driver" == "vmware" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
+    [[ "$driver" == "vmware" ]] && driver_array+=() # vmware graphic drivers
 done
 
 # Filter out "amd" since its not a package
@@ -122,7 +122,7 @@ rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 # Start hyprland
 hyprland
-hyprctl monitors
+#swww wallpaper,get monitor config and maybe before get grum and sddm I guess
 
 
 #getmonitors
