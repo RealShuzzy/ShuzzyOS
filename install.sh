@@ -129,6 +129,8 @@ while IFS= read -r line; do
     elif [[ $line =~ ^[[:space:]]*Position:[[:space:]]*([0-9]+x[0-9]+) ]]; then
         offset="${BASH_REMATCH[1]}"
         monitors+="monitor = ${name},${size},${offset},1.0"
+    fi
+done < <(hyprctl monitors)
 #
 for monitor in "${monitors[@]}"; do
     echo $monitor >> ~/.config/hypr/test.conf
