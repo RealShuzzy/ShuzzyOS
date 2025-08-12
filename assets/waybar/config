@@ -1,0 +1,25 @@
+{
+    "layer":"top",
+    "height":42,
+    "spacing":10,
+    "modules-left":["clock"],
+    "modules-center":["hyprland/workspaces"],
+    "modules-right":["custom/power"],
+    "hyprland/workspaces": {
+        "id":"hyprland-workspaces",
+        "persistent-workspaces": {
+            "1":[],
+            "2":[],
+            "3":[],
+            "4":[],
+            "5":[],
+            "6":[]
+        }
+    },
+    "custom/power": {
+        "format":"⏻",
+        "tooltip":"Power Menu",
+        "on-click":"wlogout -b 6",
+        "interval": 0
+    }
+}

@@ -56,7 +56,8 @@ choices_drivers=$(dialog --stdout --checklist "Select additional packages you wi
     pipewire "Audio and Bluetooth" off \
     pavucontrol "Gui audio control" off \
     nvidia "NVIDIA graphic drivers" off \
-    amd "AMD graphic drivers" off)
+    amd "AMD graphic drivers" off \
+    vmware "VMware graphic drivers" off)
 
 response=$?
 
@@ -89,6 +90,7 @@ for driver in "${driver_array[@]}"; do
     [[ "$driver" == "pipewire" ]] && driver_array+=("pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber")
     [[ "$driver" == "nvidia" ]] && driver_array+=("nvidia-utils" "nvidia-settings")
     [[ "$driver" == "amd" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
+    [[ "$driver" == "vmware" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
 done
 
 # Filter out "amd" since its not a package
@@ -100,7 +102,9 @@ for elem in "${driver_array[@]}"; do
 done
 driver_array=("${filtered[@]}")
 
-# Debug print
+#-------------------------------------------
+
+# Selected installs
 for pkg in "${pkg_array[@]}"; do
     sudo pacman -S --needed --noconfirm "$pkg" > /dev/null
 done
@@ -109,7 +113,24 @@ for driver in "${driver_array[@]}"; do
     sudo pacman -S --needed --noconfirm "$driver" > /dev/null
 done
 
-# Selected installs
+#--------------------------------------------
+#Editing Configs
+
+#getmonitors
+monitors=""
+
+while IFS= read -r line; do
+    if [[ $line =~ ^Monitor[[:space:]]+([A-Za-z0-9+]) ]]; then
+        name="${BASH_REMATCH[1]}"
+    elif [[ $line =~ ^[[:space:]]*([0-9]+x[0-9]+)@ ]]; then
+        size="${BASH_REMATCH[1]}"
+    elif [[ $line =~ ^[[:space:]]*Position:[[:space:]]*([0-9]+x[0-9]+) ]]; then
+        offset="${BASH_REMATCH[1]}"
+        monitors+="monitor = ${name},${size},${offset},1.0"
+#
+for monitor in "${monitors[@]}"; do
+    echo $monitor >> ~/.config/hypr/test.conf
+done
 
 #--------------------EXIT------------------
 kill $KEEPALIVE_PID
