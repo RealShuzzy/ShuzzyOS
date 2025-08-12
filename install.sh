@@ -133,7 +133,7 @@ while IFS= read -r line; do
 done < <(hyprctl monitors)
 #
 for monitor in "${monitors[@]}"; do
-    echo $monitor >> ~/.config/hypr/test2.conf
+    echo $monitor >> ~/.config2/hypr/test.conf
 done
 
 #--------------------EXIT------------------
