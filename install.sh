@@ -120,6 +120,14 @@ rsync -r ~/.ShuzzyOS/config/ ~/.config/
 mkdir -p ~/pictures/wallpaper
 rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
+
+# Z-Shell
+sudo pacman -S --needed --noconfirm zsh > /dev/null
+sudo chsh -s /usr/bin/zsh $USER
+
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh_theme/powerlevel10k
+echo 'source ~/.zsh_theme/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
+
 # Start hyprland
 reboot
 
