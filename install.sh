@@ -124,9 +124,9 @@ rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 # Z-Shell
 sudo pacman -S --needed --noconfirm zsh > /dev/null
 sudo chsh -s /usr/bin/zsh $USER
-#git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh_theme/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
 rsync ~/.ShuzzyOS/assets/.p10k.zsh ~/
-echo 'source ~/.p10k.zsh' >> ~/.zshrc
+echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
 
 # Start hyprland
 reboot
