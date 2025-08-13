@@ -122,7 +122,7 @@ rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 
 # Z-Shell
-source scripts/zsh.sh
+source ~/.ShuzzyOS/scripts/zsh.sh
 
 #--------------------EXIT------------------
 reboot
