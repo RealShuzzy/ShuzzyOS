@@ -121,7 +121,7 @@ mkdir -p ~/pictures/wallpaper
 rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 # Start hyprland
-hyprland
+reboot
 
 
 #--------------------EXIT------------------
