@@ -16,7 +16,9 @@ KEEPALIVE_PID=$!
 
 # Check if Distro is arch-based
 if ! grep -qi arch /etc/os-release 2>/dev/null; then
+    clear
     echo "This installer is only available for arch-based systems."
+    kill $KEEPALIVE_PID
     exit 0
 fi
 
@@ -67,17 +69,15 @@ clear
 #------------------------------------------
 
 # Check if multilib is enabled
-if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
-    echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
+if ! sudo grep -q '^\[multilib\]' /etc/pacman.conf; then
+    sudo echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
 else
-    sed -i '/^\[multilib\]/,/^Include = \/etc\/pacman.d\/mirrorlist/ s/^#//' /etc/pacman.conf
+    sudo sed -i '/^\[multilib\]/,/^Include = \/etc\/pacman.d\/mirrorlist/ s/^#//' /etc/pacman.conf
 fi
 
 # Needed installs
 sudo pacman -Syu --needed --noconfirm > /dev/null
-sudo pacman -S --needed --noconfirm hyprland > /dev/null
-sudo pacman -S --needed --noconfirm git > /dev/null
-sudo pacman -S --needed --noconfirm rsync > /dev/null
+sudo pacman -S --needed --noconfirm rsync git hyprland > /dev/null
 
 # Cloning GitHub Repository.
 git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
@@ -122,16 +122,7 @@ rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 
 # Z-Shell
-sudo pacman -S --needed --noconfirm zsh > /dev/null
-sudo chsh -s /usr/bin/zsh $USER
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
-rsync ~/.ShuzzyOS/assets/.p10k.zsh ~/
-echo 'source ~/.powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-
-# Start hyprland
-reboot
-
+source scripts/zsh.sh
 
 #--------------------EXIT------------------
-kill $KEEPALIVE_PID
-#-------------------------------------------
+reboot

@@ -1,5 +1,6 @@
 #waybar {
     background-color: transparent;
+    color: rgba(255, 255, 255, 1);
 }
 
 #hyprland-workspaces, button {
