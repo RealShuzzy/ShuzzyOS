@@ -34,7 +34,7 @@ Rectangle {
             Button {
                 text: "Login"
                 width: 120
-                onClick: {
+                onClicked: {
                     login(password.text)
                 }
             }
