@@ -121,11 +121,17 @@ mkdir -p ~/pictures/wallpaper
 rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 
-# Z-Shell
+# z-shell
 source ~/.ShuzzyOS/scripts/zsh.sh
 
-# Font
+# font
 source ~/.ShuzzyOS/scripts/font.sh
+
+# bootloader
+source ~/.ShuzzyOS/scripts/grub.sh
+
+# sddm
+source ~/.ShuzzyOS/scripts/sddm.sh
 
 #--------------------EXIT------------------
 reboot
