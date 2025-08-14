@@ -48,7 +48,7 @@ Rectangle {
                 text: "Login"
                 width: 150
                 onClicked: {
-                    sddm.login(username, password.text, session)
+                    sddm.login(username, password.text, sessionIndex)
                 }
             }
 
