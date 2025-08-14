@@ -1,3 +1,6 @@
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+
 Rectangle {
     width: Screen.width
     height: Screen.height
@@ -21,9 +24,10 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            PasswordField {
+            TextField{
                 id: password
-                placeholderText: "Password"
+                echoMode: TextInput.Password
+                placeholderText: qsTr("Password")
                 width: 300
             }
 
