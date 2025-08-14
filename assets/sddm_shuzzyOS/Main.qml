@@ -25,6 +25,20 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
             }
 
+            ComboBox {
+                id = session
+                arrowIcon: "angle-down.png"
+                model: sessionModel
+                index: sessionModel.lastIndex
+            }
+
+            ComboBox {
+                id = username
+                arrowIcon: "angle-down.png"
+                model: userModel
+                index: userModel.lastIndex
+            }
+
             PasswordBox{
                 id: password
                 width: 300
@@ -34,9 +48,11 @@ Rectangle {
                 text: "Login"
                 width: 150
                 onClicked: {
-                    sddm.login(userModel.lastUser, password.text, 0)
+                    sddm.login(username, password.text, session)
                 }
             }
+
+            
         }
     }
 }
