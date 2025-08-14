@@ -48,8 +48,26 @@ Rectangle {
                 text: "Login"
                 width: 150
                 onClicked: {
-                    sddm.login(username, password.text, sessionIndex)
+                    sddm.login(
+                        username, 
+                        password.text, 
+                        sessionModel.get(session.currentIndex).key
+                    )
                 }
+            }
+
+            Text {
+                text: "Welcome"+ username + "username.text" + username.text
+                color: "white"
+                font.pixelSize: 24
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Text {
+                text: "session"+ session + "session.text" + session.text + "key" + sessionModule.get(session.currentIndex).key + "nokey" + sessionModule.get(session.currentIndex)
+                color: "white"
+                font.pixelSize: 24
+                horizontalAlignment: Text.AlignHCenter
             }
 
             
