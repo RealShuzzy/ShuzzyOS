@@ -5,3 +5,6 @@ sudo tee /etc/sddm.conf > /dev/null <<EOF
 User=$USER
 Session=Hyprland
 EOF
+
+#Theme
+sudo rsync -r ~/.ShuzzyOS/assets/sddm_shuzzyOS /usr/share/sddm/themes/
