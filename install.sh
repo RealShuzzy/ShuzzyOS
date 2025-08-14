@@ -76,8 +76,8 @@ else
 fi
 
 # Needed installs
-sudo pacman -Syu --needed --noconfirm > /dev/null
-sudo pacman -S --needed --noconfirm rsync git hyprland > /dev/null
+sudo pacman -Syu --needed --noconfirm 
+sudo pacman -S --needed --noconfirm rsync git hyprland 
 
 # Cloning GitHub Repository.
 git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
@@ -107,11 +107,11 @@ driver_array=("${filtered[@]}")
 
 # Selected installs
 for pkg in "${pkg_array[@]}"; do
-    sudo pacman -S --needed --noconfirm "$pkg" > /dev/null
+    sudo pacman -S --needed --noconfirm "$pkg" 
 done
 
 for driver in "${driver_array[@]}"; do
-    sudo pacman -S --needed --noconfirm "$driver" > /dev/null
+    sudo pacman -S --needed --noconfirm "$driver" 
 done
 
 #--------------------------------------------

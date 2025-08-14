@@ -26,14 +26,14 @@ Rectangle {
             }
 
             ComboBox {
-                id = session
+                id: session
                 arrowIcon: "angle-down.png"
                 model: sessionModel
                 index: sessionModel.lastIndex
             }
 
             ComboBox {
-                id = username
+                id: username
                 arrowIcon: "angle-down.png"
                 model: userModel
                 index: userModel.lastIndex
