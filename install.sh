@@ -124,5 +124,8 @@ rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 # Z-Shell
 source ~/.ShuzzyOS/scripts/zsh.sh
 
+# Font
+source ~/.ShuzzyOS/scripts/font.sh
+
 #--------------------EXIT------------------
 reboot
