@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import SddmComponents 2.0
 
 Rectangle {
     width: Screen.width
@@ -10,7 +11,7 @@ Rectangle {
         width: 400
         height: 300
         color: "#2e2e2e"
-        radius: 10
+        radius: 20
         anchors.centerIn: parent
 
         Column {
@@ -24,18 +25,16 @@ Rectangle {
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            TextField{
+            PasswordBox{
                 id: password
-                echoMode: TextInput.Password
-                placeholderText: qsTr("Password")
                 width: 300
             }
 
             Button {
                 text: "Login"
-                width: 120
+                width: 150
                 onClicked: {
-                    login(password.text)
+                    sddm.login(userModel.lastUser, password.text, 0)
                 }
             }
         }
