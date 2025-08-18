@@ -1,36 +1,57 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
 import SddmComponents 2.0
-
-import "components"
 
 Rectangle {
   width: Screen.width
   height: Screen.height
-  color: "#1e1e1e" // Dark Background
+
+  property int sessionIndex: session.index
+
+  TextConstants { id: textConstants}
+
+  Connections {
+    target: sddm
+    function onLoginSucceeded() {}
+    function onInformationMessage(Message) {}
+    function onLoginFailed() {
+      pw_entry.text = ""
+    }
+  }
 
   Rectangle {
-    width: 500
-    height: 500
-    color: "#2e2e2e"
-    radius: 20
-    anchors.centerIn: parent
+    color: "transparent"
 
-    Column {
-      anchors.centerIn: parent
-      spacing: 20
+    Rectangle {
+      width: 500
+      height: 300
 
-      LoginForm {
-        id: form
-        height: 300
-        width: 300
-      }
+      Item {
+        Text {
+          text:sddm.hostName
+        }
 
-      Button {
-        onClicked: {
-          sddm.login("shuzzy","shuzzy","hyprland")
+        Column {
+          Row {
+            TextBox {
+              id: user_entry
+              text: userModel.lastUser
+            }
+          }
+
+          Row {
+            PasswordBox {
+              id: pw_entry
+
+              Keys.onPressed: function (event) {
+                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                  sddm.login(user_entry.text, pw_entry.text, sessionIndex)
+                }
+              }
+            }
+          }
         }
       }
     }
+
   }
 }
