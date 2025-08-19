@@ -66,6 +66,8 @@ Rectangle {
         font.pixelSize: 40
         anchors.centerIn: parent
       }
+
+      
     }
 
     Rectangle {
@@ -84,7 +86,7 @@ Rectangle {
         Row {
           width: parent.width
           height: parent.height / 5
-
+          
           TextBox {
             id: user_entry
             text: userModel.lastUser
@@ -99,6 +101,7 @@ Rectangle {
 
             KeyNavigation.tab: pw_entry
           }
+          
         }
 
         Row {
@@ -116,7 +119,7 @@ Rectangle {
             color: "#55000000"
             borderColor: "transparent"
 
-            KeyNavigation.tab: loginButton; KeyNavigation.backtab: user_entry
+            KeyNavigation.tab: control; KeyNavigation.backtab: user_entry
 
             Keys.onPressed: function (event) {
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
@@ -131,12 +134,11 @@ Rectangle {
           height: parent.height / 5
 
           Button {
-            id: loginButton
+            id: control
             width: parent.width / 3
             height: parent.height
             radius: 20
-            color: control.down ? "#666" : control.hovered ? "#999" : "#444"
-
+            
             text: "Login"
             anchors.centerIn: parent
 
