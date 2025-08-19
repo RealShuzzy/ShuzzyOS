@@ -1,4 +1,7 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Effects
 import SddmComponents 2.0
 
 Rectangle {
@@ -26,11 +29,27 @@ Rectangle {
     fillMode: Image.PreserveAspectCrop
   }
 
+  ShaderEffectSource {
+    id: blurMask
+    sourceItem: bg
+    anchors.centerIn: parent
+    width:700
+    height:200
+  }
+
+  MultiEffect {
+    id: blur
+    source: blurMask
+    anchors.fill: blurMask
+    blurEnabled: true
+    blur: 20
+    blurMax: 64
+  }
+
   Rectangle {
     width: 500
     height: 300
     color: "#88000000"
-    radius: 20
     anchors.centerIn: parent
 
     Item {
