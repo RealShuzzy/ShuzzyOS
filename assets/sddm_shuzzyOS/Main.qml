@@ -32,7 +32,7 @@ Rectangle {
   Rectangle {
     id: blurMask
     anchors.centerIn: parent
-    width: 500
+    width: parent.width / 3
     height: parent.height
   }
 
@@ -50,30 +50,71 @@ Rectangle {
     radius: 64
   }
 
-  Rectangle {
-    width: 500
-    height: 300
-    color: "#88000000"
+  ColumnLayout {
+    width: parent.width / 3
+    height: parent.height
     anchors.centerIn: parent
+    spacing: 0
 
-    Item {
-      anchors.centerIn: parent
+    Rectangle {
+      Layout.preferredWidth: parent.width
+      Layout.preferredHeight: parent.height / 2.5
 
       Text {
-        text: sddm.hostName
+        text: "Clock"
+        font.pixelSize: 40
+        anchors.centerIn: parent
       }
+    }
+
+    Rectangle {
+      Layout.preferredWidth: parent.width
+      Layout.preferredHeight: parent.height / 3
 
       Column {
+        width: parent.width / 1.5
+        height: parent.height / 2
+
+        spacing: parent.height / 15
+
+        anchors.centerIn: parent
+
         Row {
+          width: parent.width
+          height: parent.height / 5
+
           TextBox {
             id: user_entry
             text: userModel.lastUser
+
+            width: parent.width / 1.25
+            height: parent.height
+            radius:20
+            anchors.centerIn: parent
+
+            color: "#55000000"
+            borderColor: "transparent"
+
+            KeyNavigation.tab: pw_entry
           }
         }
 
         Row {
+          width: parent.width
+          height: parent.height / 5
+
           PasswordBox {
             id: pw_entry
+
+            width: parent.width / 1.25
+            height: parent.height
+            radius: 20
+            anchors.centerIn: parent
+
+            color: "#55000000"
+            borderColor: "transparent"
+
+            KeyNavigation.tab: loginButton; KeyNavigation.backtab: user_entry
 
             Keys.onPressed: function (event) {
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
@@ -82,7 +123,35 @@ Rectangle {
             }
           }
         }
+
+        Row {
+          width: parent.width
+          height: parent.height / 5
+
+          Button {
+            id: loginButton
+            width: parent.width / 3
+            height: parent.height
+            radius: 20
+            color: control.down ? "#666" : control.hovered ? "#999" : "#444"
+
+            text: "Login"
+            anchors.centerIn: parent
+
+            KeyNavigation.backtab: pw_entry
+
+            onClicked: { sddm.login(user_entry.text, pw_entry.text, sessionIndex) }
+          }
+        }
       }
+    }
+
+    Item { Layout.fillHeight: true }
+
+    Rectangle {
+      Layout.preferredWidth: parent.width
+      Layout.preferredHeight: parent.height / 15
+      color: "#55000000"
     }
   }
 }
