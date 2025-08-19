@@ -4,6 +4,7 @@ import SddmComponents 2.0
 Rectangle {
   width: Screen.width
   height: Screen.height
+  color: #0f0f0f
 
   property int sessionIndex: session.index
 
@@ -17,13 +18,22 @@ Rectangle {
       pw_entry.text = ""
     }
   }
+  
+  Background {
+    anchors.fill: parent
+    source: "/home/shuzzy/pictures/wallpapers/wallpaper.png"
+    fillMode: Image.PreserveAspectCrop
+  }
 
   Rectangle {
     color: "transparent"
+    anchors.centerIn: parent
 
     Rectangle {
       width: 500
       height: 300
+      color: #1f1f1f
+      anchors.centerIn: parent
 
       Item {
         Text {
