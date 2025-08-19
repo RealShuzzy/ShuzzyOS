@@ -11,3 +11,4 @@ EOF
 
 #Theme
 sudo rsync -r ~/.ShuzzyOS/assets/sddm_shuzzyOS /usr/share/sddm/themes/
+sudo rsync ~/.ShuzzyOS/assets/wallpaper.png /usr/share/sddm/themes/sddm_shuzzyOS/background.png

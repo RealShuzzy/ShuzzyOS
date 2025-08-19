@@ -22,7 +22,7 @@ Rectangle {
   Background {
     id: bg
     anchors.fill: parent
-    source: "/home/shuzzy/pictures/wallpapers/wallpaper.png"
+    source: Qt.resolvedUrl(config.background)
     fillMode: Image.PreserveAspectCrop
   }
 
@@ -35,7 +35,7 @@ Rectangle {
 
     Item {
       anchors.centerIn: parent
-      
+
       Text {
         text: sddm.hostName
       }
