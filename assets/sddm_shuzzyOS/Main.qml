@@ -59,6 +59,7 @@ Rectangle {
     Rectangle {
       Layout.preferredWidth: parent.width
       Layout.preferredHeight: parent.height / 2.5
+      color: "transparent"
 
       Text {
         text: "Clock"
@@ -70,6 +71,7 @@ Rectangle {
     Rectangle {
       Layout.preferredWidth: parent.width
       Layout.preferredHeight: parent.height / 3
+      color: "transparent"
 
       Column {
         width: parent.width / 1.5
@@ -151,7 +153,7 @@ Rectangle {
     Rectangle {
       Layout.preferredWidth: parent.width
       Layout.preferredHeight: parent.height / 15
-      color: "#55000000"
+      color: "transparent"
     }
   }
 }
