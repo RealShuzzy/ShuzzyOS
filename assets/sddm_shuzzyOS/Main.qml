@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.15
 import SddmComponents 2.0
 
 Rectangle {
+  id: screen
   width: Screen.width
   height: Screen.height
   color: "#0f0f0f"
@@ -30,23 +31,23 @@ Rectangle {
   }
 
   Rectangle {
-    id: blurMask
+    id: stripe_blur
     anchors.centerIn: parent
     width: parent.width / 3
     height: parent.height
   }
 
   ShaderEffectSource {
-    id: croppedBg
+    id: bg_blur
     sourceItem: bg
-    sourceRect: Qt.rect(blurMask.x, blurMask.y, blurMask.width, blurMask.height)
+    sourceRect: Qt.rect(stripe_blur.x, stripe_blur.y, stripe_blur.width, stripe_blur.height)
     live: true
   }
 
   FastBlur {
     id: blur
-    source: croppedBg
-    anchors.fill: blurMask
+    source: bg_blur
+    anchors.fill: stripe_blur
     radius: 64
   }
 
@@ -66,11 +67,10 @@ Rectangle {
         font.pixelSize: 40
         anchors.centerIn: parent
       }
-
-      
     }
 
     Rectangle {
+      id: middle_stripe
       Layout.preferredWidth: parent.width
       Layout.preferredHeight: parent.height / 3
       color: "transparent"
@@ -79,7 +79,7 @@ Rectangle {
         width: parent.width / 1.5
         height: parent.height / 2
 
-        spacing: parent.height / 15
+        spacing: parent.height / 20
 
         anchors.centerIn: parent
 
@@ -87,19 +87,23 @@ Rectangle {
           width: parent.width
           height: parent.height / 5
           
-          TextBox {
-            id: user_entry
-            text: userModel.lastUser
-
+          // Username
+          TextField {
+            id: username
+            anchors.centerIn: parent
             width: parent.width / 1.25
             height: parent.height
-            radius:20
-            anchors.centerIn: parent
-
-            color: "#55000000"
-            borderColor: "transparent"
-
-            KeyNavigation.tab: pw_entry
+            text: userModel.lastUser
+            placeholderText: "Username"
+            placeholderTextColor: "white"
+            font.pixelSize: 15
+            horizontalAlignment: Text.AlignHCenter
+            color: "white"
+            background : Rectangle {
+              color: "#55000000"
+              radius: 20
+            }
+            KeyNavigation.tab: password;
           }
           
         }
@@ -108,22 +112,29 @@ Rectangle {
           width: parent.width
           height: parent.height / 5
 
-          PasswordBox {
-            id: pw_entry
-
+          // Password
+          TextField {
+            id: password
             width: parent.width / 1.25
             height: parent.height
-            radius: 20
+            placeholderText: "Password"
+            placeholderTextColor: "white"
+            echoMode: TextInput.Password
+            font.pixelSize: 15
+            horizontalAlignment: Text.AlignHCenter
+            color: "white"
+            background : Rectangle {
+              color: "#55000000"
+              radius: 20
+            }
+
             anchors.centerIn: parent
 
-            color: "#55000000"
-            borderColor: "transparent"
-
-            KeyNavigation.tab: control; KeyNavigation.backtab: user_entry
+            KeyNavigation.tab: control; KeyNavigation.backtab: username
 
             Keys.onPressed: function (event) {
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                sddm.login(user_entry.text, pw_entry.text, sessionIndex)
+                sddm.login(username.text, password.text, sessionIndex)
               }
             }
           }
@@ -142,9 +153,9 @@ Rectangle {
             text: "Login"
             anchors.centerIn: parent
 
-            KeyNavigation.backtab: pw_entry
+            KeyNavigation.backtab: password
 
-            onClicked: { sddm.login(user_entry.text, pw_entry.text, sessionIndex) }
+            onClicked: { sddm.login(username.text, password.text, sessionIndex) }
           }
         }
       }
