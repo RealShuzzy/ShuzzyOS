@@ -95,7 +95,7 @@ Rectangle {
             height: parent.height
             text: userModel.lastUser
             placeholderText: "Username"
-            placeholderTextColor: "white"
+            placeholderTextColor: "#cccccc"
             font.pixelSize: 15
             horizontalAlignment: Text.AlignHCenter
             color: "white"
@@ -118,7 +118,7 @@ Rectangle {
             width: parent.width / 1.25
             height: parent.height
             placeholderText: "Password"
-            placeholderTextColor: "white"
+            placeholderTextColor: "#cccccc"
             echoMode: TextInput.Password
             font.pixelSize: 15
             horizontalAlignment: Text.AlignHCenter
@@ -148,12 +148,14 @@ Rectangle {
             id: control
             width: parent.width / 3
             height: parent.height
+            color: "#55000000"
             radius: 20
+            
             
             text: "Login"
             anchors.centerIn: parent
 
-            KeyNavigation.backtab: password
+            KeyNavigation.tab: username; KeyNavigation.backtab: password
 
             onClicked: { sddm.login(username.text, password.text, sessionIndex) }
           }
