@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
-import SddmComponents 2.0
+import SddmComponents 2.0 as SDDM
 
 Rectangle {
   id: screen
@@ -12,7 +12,7 @@ Rectangle {
 
   property int sessionIndex: session.index
 
-  TextConstants { id: textConstants}
+  SDDM.TextConstants { id: textConstants}
 
   Connections {
     target: sddm
@@ -23,7 +23,7 @@ Rectangle {
     }
   }
   
-  Background {
+  SDDM.Background {
     id: bg
     anchors.fill: parent
     source: Qt.resolvedUrl(config.background)
@@ -62,10 +62,10 @@ Rectangle {
       Layout.preferredHeight: parent.height / 2.5
       color: "transparent"
 
-      Text {
-        text: "Clock"
-        font.pixelSize: 40
+      SDDM.Clock {
+        id: clock
         anchors.centerIn: parent
+        color: "white"
       }
     }
 
