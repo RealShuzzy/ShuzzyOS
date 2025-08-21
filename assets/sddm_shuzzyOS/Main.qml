@@ -4,7 +4,11 @@ import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import SddmComponents 2.0 as SDDM
 
+
+
 Rectangle {
+  
+
   id: screen
   width: Screen.width
   height: Screen.height
@@ -50,22 +54,97 @@ Rectangle {
     anchors.fill: stripe_blur
     radius: 64
   }
+  
+
+  Keys.onPressed: function (event) {
+    if (event.key === Qt.Key_Escape) {
+
+      if (poweroff.activeFocus) {
+        reboot.forceActiveFocus()
+      } else if (reboot.activeFocus) {
+        session.forceActiveFocus()
+      } else if (session.activeFocus) {
+        keyboard.forceActiveFocus()
+      } else if (keyboard.activeFocus) {
+        poweroff.forceActiveFocus()
+      } else {
+        poweroff.forceActiveFocus()
+      }
+    }
+  }
 
   ColumnLayout {
     width: parent.width / 3
     height: parent.height
     anchors.centerIn: parent
-    spacing: 0
 
     Rectangle {
       Layout.preferredWidth: parent.width
       Layout.preferredHeight: parent.height / 2.5
       color: "transparent"
 
-      SDDM.Clock {
-        id: clock
-        anchors.centerIn: parent
-        color: "white"
+      Rectangle {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 100
+        width: parent.width
+        height: parent.height / 3
+        color: "transparent"
+
+        Column {
+          width: parent.width
+          height: parent.height
+          spacing: 20
+
+          Row {
+            width: parent.width
+            height: parent.height / 1.75
+            // Time
+            Text {
+              id: clock
+              font.family: "FiraCode Nerd Font"
+              anchors.centerIn: parent
+              font.pixelSize: 80
+              color: "white"
+              text: Qt.formatTime(new Date(), "HH:mm")
+
+              Timer {
+                id: clock_timer
+                interval: 60000
+                running: true
+                repeat: true
+                triggeredOnStart: true
+                onTriggered: {
+                  clock.text = Qt.formatTime(new Date(), "HH:mm")
+                  var now = new Date()
+                  var msUnitlNextMinute = (60 - now.getSeconds()) * 1000
+                  clock.Timer.interval = msUnitlNextMinute
+                }
+              }
+            }
+          }
+
+          Row {
+            width: parent.width
+            height: parent.height / 10
+            // Date
+            Text {
+              id: date
+              font.family: "FiraCode Nerd Font"
+              anchors.centerIn: parent
+              font.pixelSize: 40
+              color: "white"
+              text: Qt.formatDate(new Date(), "dddd d")
+
+              Timer {
+                interval: 6000
+                running: true
+                repeat: true
+                onTriggered: date.text = Qt.formatDate(new Date(), "dddd d")
+              }
+            }
+          }
+        }
       }
     }
 
@@ -90,6 +169,7 @@ Rectangle {
           // Username
           QQC.TextField {
             id: username
+            font.family: "FiraCode Nerd Font"
             anchors.centerIn: parent
             width: parent.width / 1.25
             height: parent.height
@@ -103,6 +183,7 @@ Rectangle {
               color: "#55000000"
               radius: 20
             }
+            
             KeyNavigation.tab: password; KeyNavigation.backtab: login
 
           }
@@ -116,6 +197,7 @@ Rectangle {
           // Password
           QQC.TextField {
             id: password
+            font.family: "FiraCode Nerd Font"
             width: parent.width / 1.25
             height: parent.height
             placeholderText: "Password"
@@ -128,6 +210,8 @@ Rectangle {
               color: "#55000000"
               radius: 20
             }
+
+            
 
             anchors.centerIn: parent
 
@@ -147,6 +231,7 @@ Rectangle {
 
           QQC.Button {
             id: login
+            font.family: "FiraCode Nerd Font"
             width: parent.width / 2.5
             height: parent.height
             text: "Login"
@@ -168,6 +253,12 @@ Rectangle {
             KeyNavigation.tab: username; KeyNavigation.backtab: password
 
             onClicked: { sddm.login(username.text, password.text, sessionIndex) }
+
+            Keys.onPressed: function (event) {
+              if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                sddm.login(username.text, password.text, sessionIndex)
+              }
+            }
           }
         }
       }
@@ -176,9 +267,149 @@ Rectangle {
     Item { Layout.fillHeight: true }
 
     Rectangle {
+      id: menu_trigger
       Layout.preferredWidth: parent.width
       Layout.preferredHeight: parent.height / 15
       color: "transparent"
+
+      property bool hovered: false
+      
+      MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        onEntered: menu_trigger.hovered = true
+        onExited: menu_trigger.hovered = false
+      }
+
+      Item {
+        id: menu
+        anchors.fill: parent
+
+        Rectangle {
+          id: settingsBar
+          width: childrenRect.width + 20
+          height: 50
+          radius: 20
+          color: "#55000000"
+          anchors.centerIn: parent
+          y: parent.height
+
+          
+          Row {
+            anchors.centerIn: parent
+            spacing: 10
+
+            // poweroff
+            Rectangle {
+              id: poweroff
+              width: 40
+              height: 40
+              radius: 10
+              color: (poweroff_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+
+              Image {
+                source: "icons/poweroff.svg"
+                width: 30
+                height: 30
+                smooth: true
+                anchors.centerIn: parent
+              }
+
+              MouseArea {
+                id: poweroff_ma
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: console.log("click")
+                cursorShape: Qt.PointingHandCursor
+              }
+            }
+
+            
+            // reboot
+            Rectangle {
+              id: reboot
+              width: 40
+              height: 40
+              radius: 10
+              color: (reboot_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+
+              Image {
+                source: "icons/reboot.svg"
+                width: 30
+                height: 30
+                smooth: true
+                anchors.centerIn: parent
+              }
+
+              MouseArea {
+                id: reboot_ma
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: console.log("click")
+                cursorShape: Qt.PointingHandCursor
+              }
+            }
+
+            // session
+            Rectangle {
+              id: session
+              width: 40
+              height: 40
+              radius: 10
+              color: (session_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+
+              Image {
+                source: "icons/session.svg"
+                width: 30
+                height: 30
+                smooth: true
+                anchors.centerIn: parent
+              }
+
+              MouseArea {
+                id: session_ma
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: console.log("click")
+                cursorShape: Qt.PointingHandCursor
+              }
+            }
+
+            // keyboard
+            Rectangle {
+              id: keyboard
+              width: 40
+              height: 40
+              radius: 10
+              color: (keyboard_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+
+              Image {
+                source: "icons/keyboard.svg"
+                width: 30
+                height: 30
+                smooth: true
+                anchors.centerIn: parent
+              }
+
+              MouseArea {
+                id: keyboard_ma
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: console.log("click")
+                cursorShape: Qt.PointingHandCursor
+              }
+            }
+          }
+        }
+        visible: true //menu_trigger.hovered
+      }
+    }
+  }
+  Component.onCompleted: {
+    if (username.text === "") {
+      username.forceActiveFocus = true
+    } else {
+      password.forceActiveFocus = true
     }
   }
 }
