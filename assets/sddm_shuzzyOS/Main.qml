@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick.Controls 2.15 as QQC
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.15
 import SddmComponents 2.0
@@ -88,7 +88,7 @@ Rectangle {
           height: parent.height / 5
           
           // Username
-          TextField {
+          QQC.TextField {
             id: username
             anchors.centerIn: parent
             width: parent.width / 1.25
@@ -103,7 +103,8 @@ Rectangle {
               color: "#55000000"
               radius: 20
             }
-            KeyNavigation.tab: password;
+            KeyNavigation.tab: password; KeyNavigation.backtab: login
+
           }
           
         }
@@ -113,7 +114,7 @@ Rectangle {
           height: parent.height / 5
 
           // Password
-          TextField {
+          QQC.TextField {
             id: password
             width: parent.width / 1.25
             height: parent.height
@@ -130,7 +131,7 @@ Rectangle {
 
             anchors.centerIn: parent
 
-            KeyNavigation.tab: control; KeyNavigation.backtab: username
+            KeyNavigation.tab: login; KeyNavigation.backtab: username
 
             Keys.onPressed: function (event) {
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
@@ -144,17 +145,26 @@ Rectangle {
           width: parent.width
           height: parent.height / 5
 
-          Button {
-            id: control
-            width: parent.width / 3
+          QQC.Button {
+            id: login
+            width: parent.width / 2.5
             height: parent.height
-            color: "#55000000"
-            radius: 20
-            
-            
             text: "Login"
             anchors.centerIn: parent
+            
+            background: Rectangle {
+              color: login.pressed ? "#88000000" : login.focus ? "#88000000" : login.hovered? "#88000000" : "#55000000"
+              radius: 20
+            }
 
+            contentItem: Text {
+              text: login.text
+              color: "white"
+              font.pixelSize: 15
+              horizontalAlignment: Text.AlignHCenter
+              verticalAlignment: Text.AlignVCenter
+            }
+            
             KeyNavigation.tab: username; KeyNavigation.backtab: password
 
             onClicked: { sddm.login(username.text, password.text, sessionIndex) }
