@@ -5,8 +5,8 @@ import QtGraphicalEffects 1.15
 import SddmComponents 2.0 as SDDM
 
 Rectangle {
-  property int sessionIndex: session.index
-  property int currentSession: session.index
+  //property int sessionIndex: session.index
+  property int currentSession: sessionModel.lastIndex
 
   id: screen
   width: Screen.width
