@@ -5,7 +5,6 @@ import QtGraphicalEffects 1.15
 import SddmComponents 2.0 as SDDM
 
 Rectangle {
-  //property int sessionIndex: session.index
   property int currentSession: sessionModel.lastIndex
 
   id: screen
@@ -292,13 +291,17 @@ Rectangle {
               color: sessionList_ma.containsMouse ? "#88000000" : "transparent"
               radius: 20
 
+              function focusMethod() {
+                sessionList_text.forceActiveFocus()
+              }
+
               Text {
+                id: sessionList_text
                 text: model.name
-                color: "white"
+                color: sessionList_text.focus ? "green" : "white"
                 font.pixelSize: 15
                 anchors.centerIn: parent
                 font.family: "FiraCode Nerd Font"
-                
               }
 
               MouseArea {
@@ -354,7 +357,6 @@ Rectangle {
           anchors.centerIn: parent
           y: parent.height
           iconSize: 25
-
           
           Row {
             anchors.centerIn: parent
@@ -480,8 +482,7 @@ Rectangle {
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                   sessionList.visible = true
-                  repSession.itemAt(0).forceActiveFocus()
-
+                  repSession.itemAt(0).focusMethod()
                 }
               }
             }
