@@ -286,40 +286,54 @@ Rectangle {
             id: repSession
             model: sessionModel
             delegate: Rectangle {
+              id: sessionItem
               width: parent.width
               height: 30
-              color: sessionList_ma.containsMouse ? "#88000000" : "transparent"
+              color: sessionList_ma.containsMouse || sessionList_text.focus ? "#88000000" : "transparent"
               radius: 20
+              focus: true  // Allow focus
+
+              Keys.onPressed: (event) => {
+                  if (event.key === Qt.Key_Up) {
+                      if (index > 0) {
+                          repSession.itemAt(index - 1).focusMethod()
+                      }
+                      event.accepted = true
+                  } else if (event.key === Qt.Key_Down) {
+                      if (index < sessionModel.count - 1) {
+                          repSession.itemAt(index + 1).focusMethod()
+                      }
+                      event.accepted = true
+                  } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                      currentSession = index
+                      sessionList.visible = false
+                      event.accepted = true
+                  }
+              }
 
               function focusMethod() {
-                sessionList_text.forceActiveFocus()
+                  sessionList_text.forceActiveFocus()
               }
 
               Text {
-                id: sessionList_text
-                text: model.name
-                color: sessionList_text.focus ? "green" : "white"
-                font.pixelSize: 15
-                anchors.centerIn: parent
-                font.family: "FiraCode Nerd Font"
+                  id: sessionList_text
+                  text: model.name
+                  color: sessionList_text.focus ? "green" : "white"
+                  font.pixelSize: 15
+                  anchors.centerIn: parent
+                  font.family: "FiraCode Nerd Font"
+                  focus: true  // Allows this to receive focus
               }
 
               MouseArea {
-                id: sessionList_ma
-                anchors.fill: parent
-                onClicked: {
-                  currentSession = index
-                  sessionList.visible = false
-                }
-
-                Keys.onPressed: function (event) {
-                  if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                    currentSession = index
-                    sessionList.visible = false
+                  id: sessionList_ma
+                  anchors.fill: parent
+                  onClicked: {
+                      currentSession = index
+                      sessionList.visible = false
                   }
-                }
               }
-            }
+          }
           }
         }
       }
@@ -482,7 +496,7 @@ Rectangle {
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                   sessionList.visible = true
-                  repSession.itemAt(0).focusMethod()
+                  repSession.itemAt(currentSession).focusMethod()
                 }
               }
             }
