@@ -57,6 +57,8 @@ Rectangle {
       if (poweroff.activeFocus) {
         reboot.forceActiveFocus()
       } else if (reboot.activeFocus) {
+        suspend.forceActiveFocus()
+      } else if (suspend.activeFocus) {
         session.forceActiveFocus()
       } else if (session.activeFocus) {
         keyboard.forceActiveFocus()
@@ -326,7 +328,7 @@ Rectangle {
 
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  powerOff()
+                  SDDM.powerOff()
                 }
               }
             }
@@ -357,7 +359,7 @@ Rectangle {
 
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  reboot()
+                  SDDM.reboot()
                 }
               }
             }
@@ -388,7 +390,7 @@ Rectangle {
 
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  suspend()
+                  SDDM.suspend()
                 }
               }
             }
