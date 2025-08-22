@@ -291,17 +291,20 @@ Rectangle {
               height: 30
               color: sessionList_ma.containsMouse || sessionList_text.focus ? "#88000000" : "transparent"
               radius: 20
-              focus: true  // Allow focus
+              focus: true
+              Keys.enabled: true
 
               Keys.onPressed: (event) => {
                   if (event.key === Qt.Key_Up) {
-                      if (index > 0) {
-                          repSession.itemAt(index - 1).focusMethod()
+                      if (currentSession > 0) {
+                        currentSession -= 1
+                        repSession.itemAt(currentSession).focusMethod()
                       }
                       event.accepted = true
                   } else if (event.key === Qt.Key_Down) {
-                      if (index < sessionModel.count - 1) {
-                          repSession.itemAt(index + 1).focusMethod()
+                      if (currentSession < sessionModel.count - 1) {
+                        currentSession += 1
+                        repSession.itemAt(currentSession).focusMethod()
                       }
                       event.accepted = true
                   } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
@@ -312,17 +315,16 @@ Rectangle {
               }
 
               function focusMethod() {
-                  sessionList_text.forceActiveFocus()
+                  sessionItem.forceActiveFocus()
               }
 
               Text {
                   id: sessionList_text
                   text: model.name
-                  color: sessionList_text.focus ? "green" : "white"
+                  color: sessionItem.focus ? "green" : "white"
                   font.pixelSize: 15
                   anchors.centerIn: parent
                   font.family: "FiraCode Nerd Font"
-                  focus: true  // Allows this to receive focus
               }
 
               MouseArea {
@@ -496,6 +498,7 @@ Rectangle {
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                   sessionList.visible = true
+                  console.log("Item at", currentSession, "=", repSession.itemAt(currentSession))
                   repSession.itemAt(currentSession).focusMethod()
                 }
               }
