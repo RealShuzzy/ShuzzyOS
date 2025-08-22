@@ -328,7 +328,7 @@ Rectangle {
 
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  SDDM.powerOff()
+                  sddm.powerOff()
                 }
               }
             }
@@ -359,7 +359,7 @@ Rectangle {
 
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  SDDM.reboot()
+                  sddm.reboot()
                 }
               }
             }
@@ -390,7 +390,7 @@ Rectangle {
 
               Keys.onPressed: function (event) {
                 if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                  SDDM.suspend()
+                  sddm.suspend()
                 }
               }
             }
