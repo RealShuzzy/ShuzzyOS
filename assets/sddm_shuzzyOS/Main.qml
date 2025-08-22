@@ -6,6 +6,7 @@ import SddmComponents 2.0 as SDDM
 
 Rectangle {
   property int sessionIndex: session.index
+  property int currentSession: session.index
 
   id: screen
   width: Screen.width
@@ -61,7 +62,11 @@ Rectangle {
       } else if (suspend.activeFocus) {
         session.forceActiveFocus()
       } else if (session.activeFocus) {
-        keyboard.forceActiveFocus()
+        if (sessionList.visible) {
+          sessionList.visible = false
+        } else {
+          keyboard.forceActiveFocus()
+        }
       } else if (keyboard.activeFocus) {
         poweroff.forceActiveFocus()
       } else {
@@ -220,7 +225,7 @@ Rectangle {
 
             Keys.onPressed: function (event) {
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                sddm.login(username.text, password.text, sessionIndex)
+                sddm.login(username.text, password.text, currentSession)
               }
             }
           }
@@ -249,13 +254,13 @@ Rectangle {
               horizontalAlignment: Text.AlignHCenter
               verticalAlignment: Text.AlignVCenter
             }
-            onClicked: { sddm.login(username.text, password.text, sessionIndex) }
+            onClicked: { sddm.login(username.text, password.text, currentSession) }
             
             KeyNavigation.tab: username; KeyNavigation.backtab: password
 
             Keys.onPressed: function (event) {
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                sddm.login(username.text, password.text, sessionIndex)
+                sddm.login(username.text, password.text, currentSession)
               }
             }
           }
@@ -263,7 +268,60 @@ Rectangle {
       }
     }
 
-    Item { Layout.fillHeight: true }
+    Item { 
+      Layout.fillHeight: true 
+      Layout.fillWidth: true
+
+      Rectangle {
+        id: sessionList
+        anchors.centerIn: parent
+        width: parent.width / 3 + 40
+        height: sessionModel.count * 30
+        radius: 20
+        color: "#55000000"
+        visible: false
+
+        Column {
+          anchors.fill: parent
+          Repeater {
+            id: repSession
+            model: sessionModel
+            delegate: Rectangle {
+              width: parent.width
+              height: 30
+              color: sessionList_ma.containsMouse ? "#88000000" : "transparent"
+              radius: 20
+
+              Text {
+                text: model.name
+                color: "white"
+                font.pixelSize: 15
+                anchors.centerIn: parent
+                font.family: "FiraCode Nerd Font"
+                
+              }
+
+              MouseArea {
+                id: sessionList_ma
+                anchors.fill: parent
+                onClicked: {
+                  currentSession = index
+                  sessionList.visible = false
+                }
+
+                Keys.onPressed: function (event) {
+                  if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                    currentSession = index
+                    sessionList.visible = false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
 
     // Menu bar
     Rectangle {
@@ -395,6 +453,7 @@ Rectangle {
               }
             }
 
+            // Session
             Rectangle {
               id: session
               width: 40
@@ -414,12 +473,20 @@ Rectangle {
                 id: session_ma
                 anchors.fill: parent
                 hoverEnabled: true
-                onClicked: console.log("click")
+                onClicked: sessionList.visible = true
                 cursorShape: Qt.PointingHandCursor
+              }
+
+              Keys.onPressed: function (event) {
+                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                  sessionList.visible = true
+                  repSession.itemAt(0).forceActiveFocus()
+
+                }
               }
             }
 
-            // keyboard
+            // Keyboard
             Rectangle {
               id: keyboard
               width: 40
@@ -445,7 +512,7 @@ Rectangle {
             }
           }
         }
-        visible: true //menu_trigger.hovered
+        visible: (menu_trigger.hovered || poweroff.focus || reboot.focus || suspend.focus || session.focus || keyboard.focus) ? true : false
       }
     }
   }
