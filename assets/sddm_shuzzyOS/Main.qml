@@ -183,6 +183,12 @@ Rectangle {
             font.pixelSize: 15
 
             KeyNavigation.tab: password; KeyNavigation.backtab: login
+
+            Keys.onPressed: function (event) {
+              if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                password.forceActiveFocus()
+              }
+            }
           }
         }
 
@@ -278,6 +284,8 @@ Rectangle {
         anchors.fill: parent
 
         Rectangle {
+          property int iconSize
+
           id: settingsBar
           width: childrenRect.width + 20
           height: 50
@@ -285,6 +293,7 @@ Rectangle {
           color: "#55000000"
           anchors.centerIn: parent
           y: parent.height
+          iconSize: 25
 
           
           Row {
@@ -296,13 +305,13 @@ Rectangle {
               id: poweroff
               width: 40
               height: 40
-              radius: 10
+              radius: 15
               color: (poweroff_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
 
               Image {
                 source: "icons/poweroff.svg"
-                width: 30
-                height: 30
+                width: settingsBar.iconSize
+                height: settingsBar.iconSize
                 smooth: true
                 anchors.centerIn: parent
               }
@@ -314,21 +323,26 @@ Rectangle {
                 onClicked: console.log("click")
                 cursorShape: Qt.PointingHandCursor
               }
+
+              Keys.onPressed: function (event) {
+                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                  powerOff()
+                }
+              }
             }
 
-            
             // reboot
             Rectangle {
               id: reboot
               width: 40
               height: 40
-              radius: 10
+              radius: 15
               color: (reboot_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
 
               Image {
                 source: "icons/reboot.svg"
-                width: 30
-                height: 30
+                width: settingsBar.iconSize
+                height: settingsBar.iconSize
                 smooth: true
                 anchors.centerIn: parent
               }
@@ -340,19 +354,56 @@ Rectangle {
                 onClicked: console.log("click")
                 cursorShape: Qt.PointingHandCursor
               }
+
+              Keys.onPressed: function (event) {
+                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                  reboot()
+                }
+              }
+            }
+
+            // Suspend
+            Rectangle {
+              id: suspend
+              width: 40
+              height: 40
+              radius: 15
+              color: (suspend_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+
+              Image {
+                source: "icons/suspend.svg"
+                width: settingsBar.iconSize
+                height: settingsBar.iconSize
+                smooth: true
+                anchors.centerIn: parent
+              }
+
+              MouseArea {
+                id: suspend_ma
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: console.log("click")
+                cursorShape: Qt.PointingHandCursor
+              }
+
+              Keys.onPressed: function (event) {
+                if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                  suspend()
+                }
+              }
             }
 
             Rectangle {
               id: session
               width: 40
               height: 40
-              radius: 10
+              radius: 15
               color: (session_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
 
               Image {
                 source: "icons/session.svg"
-                width: 30
-                height: 30
+                width: settingsBar.iconSize
+                height: settingsBar.iconSize
                 smooth: true
                 anchors.centerIn: parent
               }
@@ -371,13 +422,13 @@ Rectangle {
               id: keyboard
               width: 40
               height: 40
-              radius: 10
+              radius: 15
               color: (keyboard_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
 
               Image {
                 source: "icons/keyboard.svg"
-                width: 30
-                height: 30
+                width: settingsBar.iconSize
+                height: settingsBar.iconSize
                 smooth: true
                 anchors.centerIn: parent
               }
@@ -400,9 +451,9 @@ Rectangle {
   // Focus at start
   Component.onCompleted: {
     if (username.text === "") {
-      username.forceActiveFocus = true
+      username.forceActiveFocus()
     } else {
-      password.forceActiveFocus = true
+      password.forceActiveFocus()
     }
   }
 }
