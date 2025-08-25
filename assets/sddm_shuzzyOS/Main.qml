@@ -56,6 +56,7 @@ Rectangle {
     if (event.key === Qt.Key_Escape) {
       if (sessionList.visible) {
         sessionList.visible = false
+        event.accepted = true
       }
       if (poweroff.activeFocus) {
         reboot.forceActiveFocus()
@@ -281,12 +282,6 @@ Rectangle {
       Layout.fillHeight: true 
       Layout.fillWidth: true
 
-      Text {
-        text: "current session:", currentSession
-        font.pixelSize: 40
-        color: "white"
-      }
-
       Rectangle {
         id: sessionList
         anchors.centerIn: parent
@@ -305,7 +300,7 @@ Rectangle {
               id: sessionItem
               width: parent.width
               height: 30
-              color: sessionList_ma.containsMouse || index === currentSession ? "#88000000" : "transparent"
+              color: sessionList_ma.containsMouse || index === currentSession ? "#55000000" : "transparent"
               radius: 20
               focus: true
               Keys.enabled: activeFocus
@@ -397,7 +392,7 @@ Rectangle {
               width: 40
               height: 40
               radius: 15
-              color: (poweroff_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+              color: (poweroff_ma.containsMouse || activeFocus) ? "#55000000" : "transparent"
 
               Image {
                 source: "icons/poweroff.svg"
@@ -428,7 +423,7 @@ Rectangle {
               width: 40
               height: 40
               radius: 15
-              color: (reboot_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+              color: (reboot_ma.containsMouse || activeFocus) ? "#55000000" : "transparent"
 
               Image {
                 source: "icons/reboot.svg"
@@ -459,7 +454,7 @@ Rectangle {
               width: 40
               height: 40
               radius: 15
-              color: (suspend_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+              color: (suspend_ma.containsMouse || activeFocus) ? "#55000000" : "transparent"
 
               Image {
                 source: "icons/suspend.svg"
@@ -490,7 +485,7 @@ Rectangle {
               width: 40
               height: 40
               radius: 15
-              color: (session_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+              color: (session_ma.containsMouse || activeFocus) ? "#55000000" : "transparent"
 
               Image {
                 source: "icons/session.svg"
@@ -523,7 +518,7 @@ Rectangle {
               width: 40
               height: 40
               radius: 15
-              color: (keyboard_ma.containsMouse || activeFocus) ? "#33000000" : "transparent"
+              color: (keyboard_ma.containsMouse || activeFocus) ? "#55000000" : "transparent"
 
               Image {
                 source: "icons/keyboard.svg"
