@@ -54,6 +54,9 @@ Rectangle {
   // Menu controls
   Keys.onPressed: function (event) {
     if (event.key === Qt.Key_Escape) {
+      if (sessionList.visible) {
+        sessionList.visible = false
+      }
       if (poweroff.activeFocus) {
         reboot.forceActiveFocus()
       } else if (reboot.activeFocus) {
@@ -70,6 +73,13 @@ Rectangle {
         poweroff.forceActiveFocus()
       } else {
         poweroff.forceActiveFocus()
+      }
+    } else if (event.key === Qt.Key_F4) {
+      if (sessionList.visible) {
+        sessionList.visible = false
+      } else {
+        sessionList.visible = true
+        repSession.itemAt(currentSession).focusMethod()
       }
     }
   }
@@ -271,6 +281,12 @@ Rectangle {
       Layout.fillHeight: true 
       Layout.fillWidth: true
 
+      Text {
+        text: "current session:", currentSession
+        font.pixelSize: 40
+        color: "white"
+      }
+
       Rectangle {
         id: sessionList
         anchors.centerIn: parent
@@ -289,22 +305,20 @@ Rectangle {
               id: sessionItem
               width: parent.width
               height: 30
-              color: sessionList_ma.containsMouse || sessionList_text.focus ? "#88000000" : "transparent"
+              color: sessionList_ma.containsMouse || index === currentSession ? "#88000000" : "transparent"
               radius: 20
               focus: true
-              Keys.enabled: true
+              Keys.enabled: activeFocus
 
               Keys.onPressed: (event) => {
                   if (event.key === Qt.Key_Up) {
                       if (currentSession > 0) {
                         currentSession -= 1
-                        repSession.itemAt(currentSession).focusMethod()
                       }
                       event.accepted = true
                   } else if (event.key === Qt.Key_Down) {
                       if (currentSession < sessionModel.count - 1) {
                         currentSession += 1
-                        repSession.itemAt(currentSession).focusMethod()
                       }
                       event.accepted = true
                   } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
@@ -321,7 +335,7 @@ Rectangle {
               Text {
                   id: sessionList_text
                   text: model.name
-                  color: sessionItem.focus ? "green" : "white"
+                  color: index === currentSession ? "white" : "#cccccc"
                   font.pixelSize: 15
                   anchors.centerIn: parent
                   font.family: "FiraCode Nerd Font"
