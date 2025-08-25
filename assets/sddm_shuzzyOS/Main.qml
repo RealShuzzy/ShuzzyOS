@@ -322,7 +322,6 @@ Rectangle {
                       }
                       event.accepted = true
                   } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                      currentSession = index
                       sessionList.visible = false
                       event.accepted = true
                   }
