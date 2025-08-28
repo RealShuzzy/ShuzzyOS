@@ -5,20 +5,16 @@ cancel_install()
 {
     clear
     echo "The installation of ShuzzyOS was cancelled."
-    kill $KEEPALIVE_PID
     exit 0
 }
 
 #--------------------START------------------
 sudo -v
-while true; do sudo -v; sleep 60; done &
-KEEPALIVE_PID=$!
 
 # Check if Distro is arch-based
 if ! grep -qi arch /etc/os-release 2>/dev/null; then
     clear
     echo "This installer is only available for arch-based systems."
-    kill $KEEPALIVE_PID
     exit 0
 fi
 
@@ -36,30 +32,19 @@ response=$?
 [ "$response" -eq 1 ] && cancel_install
 
 # Select packages
-choices_packages=$(dialog --stdout --checklist "Select packages you wish to install." 18 50 5 \
-    grub "Bootloader" on \
-    sddm "Display manager" on \
-    kitty "Terminal" on \
-    thunar "File Manager" on \
-    zsh "Z-Shell + p10k-Theme" on \
-    waybar "Wayland status bar" on \
-    fastfetch "Display system info" on \
-    swww "Wallpaper manager" on \
-    firefox "Firefox internet browser" on \
-    code "Visual Studio Code" off \
-    discord "Internet Messenger" off)
+choices_packages=$(dialog --stdout --checklist "Additional programs." 18 50 5 \
+  code "Visual Studio Code" off \
+  discord "Internet Messenger" off)
 
 response=$?
 
 [ "$response" -eq 1 ] && cancel_install
 
 # Select drivers
-choices_drivers=$(dialog --stdout --checklist "Select additional packages you wish to install." 12 50 5 \
-    pipewire "Audio and Bluetooth" off \
-    pavucontrol "Gui audio control" off \
-    nvidia "NVIDIA graphic drivers" off \
-    amd "AMD graphic drivers" off \
-    vmware "VMware graphic drivers" off)
+choices_drivers=$(dialog --stdout --checklist "Graphic drivers." 12 50 5 \
+  nvidia "NVIDIA graphic drivers" off \
+  amd "AMD graphic drivers" off \
+  open-vm-tools "Graphic drivers for virtual machines" off)
 
 response=$?
 
@@ -68,16 +53,9 @@ response=$?
 clear
 #------------------------------------------
 
-# Check if multilib is enabled
-if ! sudo grep -q '^\[multilib\]' /etc/pacman.conf; then
-    sudo echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" >> /etc/pacman.conf
-else
-    sudo sed -i '/^\[multilib\]/,/^Include = \/etc\/pacman.d\/mirrorlist/ s/^#//' /etc/pacman.conf
-fi
-
 # Needed installs
 sudo pacman -Syu --needed --noconfirm 
-sudo pacman -S --needed --noconfirm rsync git hyprland 
+sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim
 
 # Creating directory structure
 mkdir -p ~/git
@@ -91,10 +69,9 @@ read -r -a driver_array <<< "$choices_drivers"
 
 # Add drivers to choice
 for driver in "${driver_array[@]}"; do
-    [[ "$driver" == "pipewire" ]] && driver_array+=("pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber")
     [[ "$driver" == "nvidia" ]] && driver_array+=("nvidia-utils" "nvidia-settings")
     [[ "$driver" == "amd" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
-    [[ "$driver" == "vmware" ]] && driver_array+=() # vmware graphic drivers
+    [[ "$driver" == "open-vm-tools" ]] && $vm=true
 done
 
 # Filter out "amd" since its not a package
@@ -123,7 +100,6 @@ rsync -r ~/git/ShuzzyOS/config/ ~/.config/
 mkdir -p ~/pictures/wallpaper
 rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
-
 # z-shell
 source ~/git/ShuzzyOS/scripts/zsh.sh
 
@@ -138,6 +114,11 @@ source ~/git/ShuzzyOS/scripts/sddm.sh
 
 # yay
 source ~/git/ShuzzyOS/scripts/yay.sh
+
+# wlogout
+source ~/git/ShuzzyOS/scripts/wlogout.sh
+
+$vm && source ~/git/ShuzzyOS/scripts/open-vm-tools.sh
 
 #--------------------EXIT------------------
 reboot
