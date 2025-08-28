@@ -1,0 +1,3 @@
+[submodule "themes/sddm"]
+	path = themes/sddm
+	url = https://github.com/RealShuzzy/sddm_shuzzyOS.git
