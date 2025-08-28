@@ -79,8 +79,11 @@ fi
 sudo pacman -Syu --needed --noconfirm 
 sudo pacman -S --needed --noconfirm rsync git hyprland 
 
+# Creating directory structure
+sudo mkdir -p ~/git
+
 # Cloning GitHub Repository.
-git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/.ShuzzyOS
+git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
 
 # Seperate choices into arrays
 read -r -a pkg_array <<< "$choices_packages"
@@ -116,9 +119,9 @@ done
 
 #--------------------------------------------
 #Editing Configs
-rsync -r ~/.ShuzzyOS/config/ ~/.config/
+rsync -r ~/git/ShuzzyOS/config/ ~/.config/
 mkdir -p ~/pictures/wallpaper
-rsync ~/.ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
+rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 
 # z-shell

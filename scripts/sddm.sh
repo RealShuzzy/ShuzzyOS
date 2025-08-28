@@ -10,5 +10,5 @@ Current=sddm_shuzzyOS
 EOF
 
 #Theme
-sudo rsync -r ~/.ShuzzyOS/assets/sddm_shuzzyOS /usr/share/sddm/themes/
-sudo rsync ~/.ShuzzyOS/assets/wallpaper.png /usr/share/sddm/themes/sddm_shuzzyOS/background.png
+sudo mkdir -p "/usr/share/sddm/themes/shuzzyOS"
+sudo rsync -r ~/git/ShuzzyOS/themes/sddm/ /usr/share/sddm/themes/shuzzyOS/
