@@ -6,9 +6,9 @@ User=$USER
 Session=Hyprland
 
 [Theme]
-Current=sddm_shuzzyOS
+Current=shuzzyOS
 EOF
 
 #Theme
 sudo mkdir -p "/usr/share/sddm/themes/shuzzyOS"
-sudo rsync -r ~/git/ShuzzyOS/themes/sddm/ /usr/share/sddm/themes/shuzzyOS/
+sudo rsync -r ~/git/ShuzzyOS/themes/sddm /usr/share/sddm/themes/shuzzyOS/
