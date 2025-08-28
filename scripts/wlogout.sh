@@ -1,0 +1,2 @@
+# wlogout
+yay -S --noconfirm --answerdiff None --answerclean None --removemake --editmenu=false wlogout

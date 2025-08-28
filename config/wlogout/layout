@@ -1,0 +1,30 @@
+{
+  "label" : "lock",
+  "action" : "loginctl lock-Session",
+  "text" : "Lock",
+  "keybind" : "1" 
+},
+{
+  "label" : "shutdown",
+  "action" : "systemctl poweroff",
+  "text" : "Shutdown",
+  "keybind" : "2" 
+},
+{
+  "label" : "reboot",
+  "action" : "systemctl reboot",
+  "text" : "Reboot",
+  "keybind" : "3" 
+},
+{
+  "label" : "suspend",
+  "action" : "systemctl suspend",
+  "text" : "Suspend",
+  "keybind" : "4" 
+},
+{
+  "label" : "logout",
+  "action" : "loginctl terminate-user $USER",
+  "text" : "Logout",
+  "keybind" : "5" 
+}

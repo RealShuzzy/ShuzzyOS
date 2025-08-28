@@ -136,5 +136,8 @@ source ~/git/ShuzzyOS/scripts/grub.sh
 # sddm
 source ~/git/ShuzzyOS/scripts/sddm.sh
 
+# yay
+source ~/git/ShuzzyOS/scripts/yay.sh
+
 #--------------------EXIT------------------
 reboot
