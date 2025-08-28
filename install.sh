@@ -83,7 +83,7 @@ sudo pacman -S --needed --noconfirm rsync git hyprland
 mkdir -p ~/git
 
 # Cloning GitHub Repository.
-git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/git/
+git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
 
 # Seperate choices into arrays
 read -r -a pkg_array <<< "$choices_packages"
