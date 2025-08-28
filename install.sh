@@ -125,16 +125,16 @@ rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 
 
 # z-shell
-source ~/.ShuzzyOS/scripts/zsh.sh
+source ~/git/ShuzzyOS/scripts/zsh.sh
 
 # font
-source ~/.ShuzzyOS/scripts/font.sh
+source ~/git/ShuzzyOS/scripts/font.sh
 
 # bootloader
-source ~/.ShuzzyOS/scripts/grub.sh
+source ~/git/ShuzzyOS/scripts/grub.sh
 
 # sddm
-source ~/.ShuzzyOS/scripts/sddm.sh
+source ~/git/ShuzzyOS/scripts/sddm.sh
 
 #--------------------EXIT------------------
 reboot
