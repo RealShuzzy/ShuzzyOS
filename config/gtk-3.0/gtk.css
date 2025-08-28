@@ -1,0 +1,19 @@
+* {
+  background-color: rgba(0,0,0,0.1);
+  color: rgba(255,255,255,1);
+  font-family: "FiraCode Nerd Font";
+}
+
+button, entry {
+  background-color: rgba(0,0,0,0.2);
+  background-image: none;
+}
+
+menu, .popup {
+  background-color: rgba(0,0,0,0.15);
+  border-radius: 15px;
+}
+
+.popup decoration {
+  box-shadow: none;
+}
