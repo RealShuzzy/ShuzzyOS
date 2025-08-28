@@ -80,7 +80,7 @@ sudo pacman -Syu --needed --noconfirm
 sudo pacman -S --needed --noconfirm rsync git hyprland 
 
 # Creating directory structure
-sudo mkdir -p ~/git
+mkdir -p ~/git
 
 # Cloning GitHub Repository.
 git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/git/
