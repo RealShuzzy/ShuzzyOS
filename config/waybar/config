@@ -17,8 +17,8 @@
         }
     },
     "custom/power": {
-        "format":"⏻",
-        "tooltip":"Power Menu",
+        "format":"⏻ ",
+        "tooltip":false,
         "on-click":"wlogout -b 5",
         "interval": 0
     }
