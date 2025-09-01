@@ -1,0 +1,49 @@
+font="FiraCode Nerd Font"
+ignore-empty-password
+
+# Background
+image=~/pictures/wallpaper/wallpaper.png
+effect-blur=5x6
+
+# Indicator
+indicator
+indicator-radius=200
+indicator-thickness=25
+indicator-caps-lock
+
+# Clock
+clock
+timestr=%R
+datestr=%A %e
+
+# Color
+disable-caps-lock-text
+key-hl-color=ffffff55
+bs-hl-color=ff000055
+caps-lock-key-hl-color=ffffff55
+caps-lock-bs-hl-color=ff000055
+separator-color=00000000
+
+inside-color=00000055
+inside-clear-color=00000088
+inside-caps-lock-color=00000088
+inside-ver-color=00000088
+inside-wrong-color=ff000055
+
+ring-color=00000033
+ring-clear-color=00ff0055
+ring-caps-lock-color=ff000055
+ring-ver-color=00ff0055
+ring-wrong-color=ff000055
+
+line-color=00000000
+line-clear-color=00000000
+line-caps-lock-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+text-color=ffffff
+text-clear-color=ffffff
+text-caps-lock-color=ffffff
+text-ver-color=ffffff
+text-wrong-color=ffffff

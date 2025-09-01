@@ -118,6 +118,9 @@ source ~/git/ShuzzyOS/scripts/yay.sh
 # wlogout
 source ~/git/ShuzzyOS/scripts/wlogout.sh
 
+# swaylock
+source ~/git/ShuzzyOS/scripts/swaylock.sh
+
 $vm && source ~/git/ShuzzyOS/scripts/open-vm-tools.sh
 
 #--------------------EXIT------------------
