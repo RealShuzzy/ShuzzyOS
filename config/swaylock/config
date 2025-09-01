@@ -7,7 +7,6 @@ effect-blur=5x6
 
 # Indicator
 indicator
-indicator-radius=200
 indicator-thickness=25
 indicator-caps-lock
 

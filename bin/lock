@@ -1,0 +1,5 @@
+#!/bin/bash
+MAX_HEIGHT=$(hyprctl monitors -j | jq '[.[].height] | max')
+RADIUS=$(( MAX_HEIGHT / 8 ))
+
+swaylock --config ~/.config/swaylock/config --indicator-radius $RADIUS

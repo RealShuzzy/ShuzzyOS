@@ -99,6 +99,7 @@ done
 rsync -r ~/git/ShuzzyOS/config/ ~/.config/
 mkdir -p ~/pictures/wallpaper
 rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
+sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
 
 # z-shell
 source ~/git/ShuzzyOS/scripts/zsh.sh
