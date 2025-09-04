@@ -55,10 +55,10 @@ clear
 
 # Needed installs
 sudo pacman -Syu --needed --noconfirm 
-sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim
+sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim xdg-users-dirs
 
 # Creating directory structure
-mkdir -p ~/git
+mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures ~/videos
 
 # Cloning GitHub Repository.
 git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
@@ -95,11 +95,14 @@ for driver in "${driver_array[@]}"; do
 done
 
 #--------------------------------------------
-#Editing Configs
+# Editing Configs
 rsync -r ~/git/ShuzzyOS/config/ ~/.config/
 mkdir -p ~/pictures/wallpaper
 rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
+
+# Update paths
+xdg-user-dirs-update
 
 # z-shell
 source ~/git/ShuzzyOS/scripts/zsh.sh
