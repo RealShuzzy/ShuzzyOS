@@ -55,7 +55,7 @@ clear
 
 # Needed installs
 sudo pacman -Syu --needed --noconfirm 
-sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim xdg-user-dirs
+sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim xdg-user-dirs jq
 
 # Creating directory structure
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures ~/videos
