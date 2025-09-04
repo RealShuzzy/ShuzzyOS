@@ -125,7 +125,7 @@ source ~/git/ShuzzyOS/scripts/wlogout.sh
 # swaylock
 source ~/git/ShuzzyOS/scripts/swaylock.sh
 
-$vm && source ~/git/ShuzzyOS/scripts/open-vm-tools.sh
+$vm && source ~/git/ShuzzyOS/scripts/vm-update.sh
 
 #--------------------EXIT------------------
 reboot
