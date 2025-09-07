@@ -1,3 +1,5 @@
+# ShuzzyOS
+!["Preview of ShuzzyOS"](assets/wallpaper.png)
 ## Install
 ### Automated
 Run this command to start the installer:
