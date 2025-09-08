@@ -58,10 +58,11 @@ git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.
 read -r -a driver_array <<< "$choices_drivers"
 
 # Add drivers to choice
+vm=false
 for driver in "${driver_array[@]}"; do
     [[ "$driver" == "nvidia" ]] && driver_array+=("nvidia-utils" "nvidia-settings")
     [[ "$driver" == "amd" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
-    [[ "$driver" == "open-vm-tools" ]] && $vm=true
+    [[ "$driver" == "open-vm-tools" ]] && vm=true
 done
 
 # Filter out "amd" since its not a package
@@ -114,7 +115,7 @@ source ~/git/ShuzzyOS/scripts/swaylock.sh
 # vscode
 source ~/git/ShuzzyOS/scripts/vscode.sh
 
-$vm && source ~/git/ShuzzyOS/scripts/vm-update.sh
+[[ $vm ]] && source ~/git/ShuzzyOS/scripts/vm-update.sh
 
 #--------------------EXIT------------------
 reboot
