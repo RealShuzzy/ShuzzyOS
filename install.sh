@@ -31,15 +31,6 @@ response=$?
 
 [ "$response" -eq 1 ] && cancel_install
 
-# Select packages
-choices_packages=$(dialog --stdout --checklist "Additional programs." 18 50 5 \
-  code "Visual Studio Code" off \
-  discord "Internet Messenger" off)
-
-response=$?
-
-[ "$response" -eq 1 ] && cancel_install
-
 # Select drivers
 choices_drivers=$(dialog --stdout --checklist "Graphic drivers." 12 50 5 \
   nvidia "NVIDIA graphic drivers" off \
@@ -55,7 +46,7 @@ clear
 
 # Needed installs
 sudo pacman -Syu --needed --noconfirm 
-sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim xdg-user-dirs jq
+sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim xdg-user-dirs jq code discord
 
 # Creating directory structure
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures ~/videos
@@ -64,7 +55,6 @@ mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures ~/videos
 git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
 
 # Seperate choices into arrays
-read -r -a pkg_array <<< "$choices_packages"
 read -r -a driver_array <<< "$choices_drivers"
 
 # Add drivers to choice
@@ -86,10 +76,6 @@ driver_array=("${filtered[@]}")
 #-------------------------------------------
 
 # Selected installs
-for pkg in "${pkg_array[@]}"; do
-    sudo pacman -S --needed --noconfirm "$pkg" 
-done
-
 for driver in "${driver_array[@]}"; do
     sudo pacman -S --needed --noconfirm "$driver" 
 done
