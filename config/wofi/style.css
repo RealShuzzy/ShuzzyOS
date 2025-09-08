@@ -1,0 +1,48 @@
+* {
+    border-radius:15px;
+}
+
+*:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+window {
+    font-size:1.5rem;
+    font-family: "FiraCode Nerd Font";
+    background-color: rgba(0,0,0,0.15);
+}
+
+#input {
+    border: 0px;
+    background-color: rgba(0,0,0,0.3);
+    color: rgba(204, 204, 204, 1);
+    margin-bottom:20px;
+    caret-color: rgba(204, 204, 204, 1);
+    min-height: 3.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+}
+
+#outer-box {
+    margin:20px;
+}
+
+#text {
+    color: rgba(204, 204, 204, 1);
+    padding-left: 1rem;
+}
+
+#entry:selected {
+    background-color: rgba(0,0,0,0.3);
+    min-height: 3rem;
+}
+
+#text:selected {
+    color: white;
+}
+
+image {
+    margin-left: 1rem;
+}

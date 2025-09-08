@@ -1,0 +1,4 @@
+width = 20%
+mode = drun
+allow_images = true
+lines = 5
