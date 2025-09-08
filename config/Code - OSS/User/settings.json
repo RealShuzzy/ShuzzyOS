@@ -1,0 +1,13 @@
+{
+    "editor.fontFamily": "FiraCode Nerd Font",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "workbench.statusBar.visible": false,
+    "workbench.activityBar.location": "hidden",
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "editor.minimap.enabled": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.renderWhitespace": "none",
+    "breadcrumbs.enabled": false,
+    "workbench.colorTheme": "Dracula ShuzzyOS"
+}

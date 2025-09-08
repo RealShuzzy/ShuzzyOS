@@ -1,0 +1,2 @@
+esbenp.prettier-vscode
+shuzzy.dracula-shuzzyos

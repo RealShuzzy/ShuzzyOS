@@ -125,6 +125,9 @@ source ~/git/ShuzzyOS/scripts/wlogout.sh
 # swaylock
 source ~/git/ShuzzyOS/scripts/swaylock.sh
 
+# vscode
+source ~/git/ShuzzyOS/scripts/vscode.sh
+
 $vm && source ~/git/ShuzzyOS/scripts/vm-update.sh
 
 #--------------------EXIT------------------
