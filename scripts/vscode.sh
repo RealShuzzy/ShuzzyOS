@@ -1,1 +1,1 @@
-cat extensions.txt | xargs -n 1 code --install-extension 
+cat "~/.config/Code - OSS/User/extensions.txt" | xargs -n 1 code --install-extension
