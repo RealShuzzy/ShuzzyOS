@@ -58,6 +58,28 @@ sudo pacman -Syu --needed --noconfirm > /dev/null
 sudo pacman -S $graphic $programs > /dev/null
 [[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron > /dev/null
 
-#-----Keep going! mkdir and clone and so on, all programs are installed!
+mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
 
+git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
+
+rsync -r ~/git/ShuzzyOS/config/ ~/.config/
+rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
+sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
+xdg-user-dirs-update
+
+source ~/git/ShuzzyOS/scripts/zsh.sh
+source ~/git/ShuzzyOS/scripts/font.sh
+source ~/git/ShuzzyOS/scripts/grub.sh
+source ~/git/ShuzzyOS/scripts/sddm.sh
+source ~/git/ShuzzyOS/scripts/yay.sh
+source ~/git/ShuzzyOS/scripts/wlogout.sh
+source ~/git/ShuzzyOS/scripts/swaylock.sh
+
+[[ $graphic != "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vscode.sh
+[[ $graphic == "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vm-update.sh
 ### INSTALLATION END ###
+hyprland
+for mon in $(hyprctl monitors | grep "Monitor" | awk '{print $2}'); do
+    echo "monitor = $mon,preferred,auto,1.0" >> ~/.config/hypr/monitor.conf
+done
+reboot
