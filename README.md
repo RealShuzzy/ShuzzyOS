@@ -3,6 +3,9 @@
 
 ## Features
 - 💧 Hyprland
+- ⚙ Waybar
+- ⏻ Wlogout
+- 🔒 Swaylock
 - 📁 Thunar
 - 📦 Pacman & Yay
 - 🔊 Pipewire
