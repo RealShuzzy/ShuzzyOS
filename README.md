@@ -12,7 +12,7 @@
 ### Applications 
 🗨 Discord  
 ✏ Neovim  
-✏ Visual Studio Code 
+✏ Visual Studio Code  
 📁 Thunar  
 ▶ Kitty  
 ▶ Wofi  
