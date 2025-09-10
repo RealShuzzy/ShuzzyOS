@@ -11,10 +11,10 @@
 ⚙ Wlogout  
 ### Applications
 🗨 Discord  
->_ Kitty
 ✏ Neovim  
 ✏ Visual Studio Code  
 📁 Thunar  
+▶ Kitty  
 ▶ Wofi  
 ### Package Management
 📦 Pacman  
