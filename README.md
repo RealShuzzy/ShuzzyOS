@@ -1,11 +1,11 @@
-# ShuzzyOS
+# 🐧 ShuzzyOS
 !["Preview of ShuzzyOS"](assets/preview.png)
 
 ## Features
 - 💧 Hyprland
-- ⚙ Waybar
-- ⏻ Wlogout
-- 🔒 Swaylock
+- 🔧 Grub
+- ⚙ Waybar & Wlogout
+- 🔒 Sddm & Swaylock
 - 📁 Thunar
 - 📦 Pacman & Yay
 - 🔊 Pipewire
