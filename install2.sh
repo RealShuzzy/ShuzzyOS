@@ -54,41 +54,43 @@ response=$?
 
 ### INSTALLATION START ###
 
-exec >/dev/null 2>&1
 {
-echo 5
-sudo pacman -Syu --needed --noconfirm
-echo 10
-sudo pacman -S --needed --noconfirm $graphic $programs
-echo 25
-[[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron
-echo 30
-mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
-echo 35
-git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
-echo 40
-rsync -r ~/git/ShuzzyOS/config/ ~/.config/
-rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
-sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
-xdg-user-dirs-update
-echo 50
-source ~/git/ShuzzyOS/scripts/zsh.sh
-echo 53
-source ~/git/ShuzzyOS/scripts/font.sh
-echo 56
-source ~/git/ShuzzyOS/scripts/grub.sh
-echo 60
-source ~/git/ShuzzyOS/scripts/sddm.sh
-echo 65
-source ~/git/ShuzzyOS/scripts/yay.sh
-echo 85
-source ~/git/ShuzzyOS/scripts/wlogout.sh
-echo 90
-source ~/git/ShuzzyOS/scripts/swaylock.sh
-echo 95
-
-[[ $graphic != "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vscode.sh
-[[ $graphic == "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vm-update.sh
-echo 100
+  echo 5
+  sudo pacman -Syu --needed --noconfirm >/dev/null 2>&1
+  echo 10
+  sudo pacman -S --needed --noconfirm "$graphic" "$programs" >/dev/null 2>&1
+  echo 25
+  [[ $graphic != "open-vm-tools" ]] && sudo pacman -S "$programs_electron" >/dev/null 2>&1
+  echo 30
+  mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >/dev/null 2>&1
+  echo 35
+  git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >/dev/null 2>&1
+  echo 40
+  rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >/dev/null 2>&1
+  rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/ >/dev/null 2>&1
+  sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/ >/dev/null 2>&1
+  xdg-user-dirs-update >/dev/null 2>&1
+  echo 50
+  source ~/git/ShuzzyOS/scripts/zsh.sh >/dev/null 2>&1
+  echo 53
+  source ~/git/ShuzzyOS/scripts/font.sh >/dev/null 2>&1
+  echo 56
+  source ~/git/ShuzzyOS/scripts/grub.sh >/dev/null 2>&1
+  echo 60
+  source ~/git/ShuzzyOS/scripts/sddm.sh >/dev/null 2>&1
+  echo 65
+  source ~/git/ShuzzyOS/scripts/yay.sh >/dev/null 2>&1
+  echo 85
+  source ~/git/ShuzzyOS/scripts/wlogout.sh >/dev/null 2>&1
+  echo 90
+  source ~/git/ShuzzyOS/scripts/swaylock.sh >/dev/null 2>&1
+  echo 95
+  if [[ $graphic != "open-vm-tools" ]]; then
+    source ~/git/ShuzzyOS/scripts/vscode.sh >/dev/null 2>&1
+  else
+    source ~/git/ShuzzyOS/scripts/vm-update.sh >/dev/null 2>&1
+  fi
+  echo 100
 } | dialog --gauge "Installing ShuzzyOS" 6 100
+
 echo done
