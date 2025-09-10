@@ -54,7 +54,7 @@ response=$?
 
 ### INSTALLATION START ###
 
-exec >"~/.install.log" 2>&1
+exec >/dev/null 2>&1
 {
 echo 5
 sudo pacman -Syu --needed --noconfirm
