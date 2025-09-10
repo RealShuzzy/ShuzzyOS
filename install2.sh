@@ -53,42 +53,43 @@ response=$?
 ### DIALOG END ###
 
 ### INSTALLATION START ###
-
+LOGFILE=~/logfile.log
+exec 3>&1
 {
   echo 5
-  sudo pacman -Syu --needed --noconfirm >/dev/null 2>&1
+  sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
   echo 10
-  sudo pacman -S --needed --noconfirm "$graphic" "$programs" >/dev/null 2>&1
+  sudo pacman -S --needed --noconfirm "$graphic" "$programs" >>"$LOGFILE" 2>&1
   echo 25
-  [[ $graphic != "open-vm-tools" ]] && sudo pacman -S "$programs_electron" >/dev/null 2>&1
+  [[ $graphic != "open-vm-tools" ]] && sudo pacman -S "$programs_electron" >>"$LOGFILE" 2>&1
   echo 30
-  mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >/dev/null 2>&1
+  mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
   echo 35
-  git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >/dev/null 2>&1
+  git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >>"$LOGFILE" 2>&1
   echo 40
-  rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >/dev/null 2>&1
-  rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/ >/dev/null 2>&1
-  sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/ >/dev/null 2>&1
-  xdg-user-dirs-update >/dev/null 2>&1
+  rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >>"$LOGFILE" 2>&1
+  rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/ >>"$LOGFILE" 2>&1
+  sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/ >>"$LOGFILE" 2>&1
+  xdg-user-dirs-update >>"$LOGFILE" 2>&1
   echo 50
-  source ~/git/ShuzzyOS/scripts/zsh.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/zsh.sh >>"$LOGFILE" 2>&1
   echo 53
-  source ~/git/ShuzzyOS/scripts/font.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/font.sh >>"$LOGFILE" 2>&1
   echo 56
-  source ~/git/ShuzzyOS/scripts/grub.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/grub.sh >>"$LOGFILE" 2>&1
   echo 60
-  source ~/git/ShuzzyOS/scripts/sddm.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/sddm.sh >>"$LOGFILE" 2>&1
   echo 65
-  source ~/git/ShuzzyOS/scripts/yay.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/yay.sh >>"$LOGFILE" 2>&1
   echo 85
-  source ~/git/ShuzzyOS/scripts/wlogout.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/wlogout.sh >>"$LOGFILE" 2>&1
   echo 90
-  source ~/git/ShuzzyOS/scripts/swaylock.sh >/dev/null 2>&1
+  source ~/git/ShuzzyOS/scripts/swaylock.sh >>"$LOGFILE" 2>&1
   echo 95
   if [[ $graphic != "open-vm-tools" ]]; then
-    source ~/git/ShuzzyOS/scripts/vscode.sh >/dev/null 2>&1
+    source ~/git/ShuzzyOS/scripts/vscode.sh >>"$LOGFILE" 2>&1
   else
-    source ~/git/ShuzzyOS/scripts/vm-update.sh >/dev/null 2>&1
+    source ~/git/ShuzzyOS/scripts/vm-update.sh >>"$LOGFILE" 2>&1
   fi
   echo 100
 } | dialog --gauge "Installing ShuzzyOS" 6 100
