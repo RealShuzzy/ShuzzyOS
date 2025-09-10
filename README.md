@@ -1,15 +1,26 @@
 # 💧 ShuzzyOS
 !["Preview of ShuzzyOS"](assets/preview.png)
 
-## Features
-### System
-🔧 Grub, Hyprland, SDDM, Swaylock, Waybar, Wlogout  
-### Apps
-🖥 Discord, Neovim, VS Code, Thunar, Kitty, Wofi  
-### Packages
-📦 Pacman, Yay  
-### Drivers
-🛠 Pipewire  
+## Features 
+### Core System 
+🔧 Grub  
+💧 Hyprland  
+🔒 Sddm  
+🔒 Swaylock  
+⚙ Waybar  
+⚙ Wlogout  
+### Applications 
+🗨 Discord  
+✏ Neovim  
+✏ Visual Studio Code 
+📁 Thunar  
+▶ Kitty  
+▶ Wofi  
+### Package Management 
+📦 Pacman  
+📦 Yay   
+### Drivers 
+🔊 Pipewire  
 
 ## Install
 ### Automated
