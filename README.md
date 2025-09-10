@@ -10,6 +10,9 @@
 - ▶ Wofi
 - 📦 Pacman & Yay
 - 🔊 Pipewire
+- ✎ Visual Studio Code & nvim
+- ✏ Visual Studio Code & nvim
+- ✐ Visual Studio Code & nvim
 
 ## Install
 ### Automated
