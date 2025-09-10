@@ -55,7 +55,7 @@ response=$?
 ### INSTALLATION START ###
 
 sudo pacman -Syu --needed --noconfirm #> /dev/null
-sudo pacman -S $graphic $programs #> /dev/null
+sudo pacman -S --needed --noconfirm $graphic $programs #> /dev/null
 [[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron #> /dev/null
 
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
