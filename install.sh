@@ -58,7 +58,7 @@ exec 3>&1
 {
   sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
   echo 5; sudo pacman -S --needed --noconfirm $graphic $programs >>"$LOGFILE" 2>&1
-  echo 10; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron >>"$LOGFILE" 2>&1
+  echo 10; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron >>"$LOGFILE" 2>&1
 
   echo 25; mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
   echo 30; git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >>"$LOGFILE" 2>&1
