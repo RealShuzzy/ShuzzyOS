@@ -54,9 +54,9 @@ response=$?
 
 ### INSTALLATION START ###
 
-sudo pacman -Syu --needed --noconfirm #> /dev/null
-sudo pacman -S --needed --noconfirm $graphic $programs #> /dev/null
-[[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron #> /dev/null
+sudo pacman -Syu --needed --noconfirm > /dev/null
+sudo pacman -S --needed --noconfirm $graphic $programs > /dev/null
+[[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron > /dev/null
 
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
 
@@ -77,9 +77,5 @@ source ~/git/ShuzzyOS/scripts/swaylock.sh
 
 [[ $graphic != "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vscode.sh
 [[ $graphic == "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vm-update.sh
-### INSTALLATION END ###
-hyprland
-for mon in $(hyprctl monitors | grep "Monitor" | awk '{print $2}'); do
-    echo "monitor = $mon,preferred,auto,1.0" >> ~/.config/hypr/monitor.conf
-done
-reboot
+
+echo done
