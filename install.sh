@@ -1,121 +1,86 @@
 #!/bin/bash
 
+programs="gnu-free-fonts hyprland git rsync go grub sddm kitty nvim thunar zsh waybar fastfetch swww firefox pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq wofi"
+programs_electron="code discord"
 # Functions
-cancel_install()
+cancel()
 {
-    clear
-    echo "The installation of ShuzzyOS was cancelled."
-    exit 0
+  sudo pacman -Rns --noconfirm dialog > /dev/null
+  clear
+  echo "The installation of ShuzzyOS was cancelled. No Changes were made to your system."
+  exit 0
 }
 
-#--------------------START------------------
+# Sudo verify
+echo "ShuzzyOS installer - please verify once for the entire installation."
 sudo -v
 
-# Check if Distro is arch-based
+# Check if System is arch-based
 if ! grep -qi arch /etc/os-release 2>/dev/null; then
-    clear
-    echo "This installer is only available for arch-based systems."
-    exit 0
+  clear
+  echo "ShuzzyOS is only available for arch-based systems. No changes were made to your system."
+  exit 0
 fi
 
-# Check if Dialog is installed / Installs if necessary
+# Install dialog if its not installed
 if ! command -v dialog &>/dev/null; then
-    echo "Dialog is not installed... installing"
-    sudo pacman -S --needed --noconfirm dialog
+  sudo pacman -S --needed --noconfirm dialog > /dev/null
 fi
-#-------------------------------------------
 
-# Launch installer
-dialog --title "ShuzzyOS" --yesno "Welcome to the ShuzzyOS installer for Archlinux.\n  Would you like to continue with the install?" 6 52
+### DIALOG START ###
+
+# Welcome
+dialog --title "ShuzzyOS" --yesno "Welcome to the ShuzzyOS installer for Archlinux." 5 52
 response=$?
+[ "$response" -eq 1 ] && cancel
 
-[ "$response" -eq 1 ] && cancel_install
-
-# Select drivers
-choices_drivers=$(dialog --stdout --checklist "Graphic drivers." 12 50 5 \
-  nvidia "NVIDIA graphic drivers" off \
-  amd "AMD graphic drivers" off \
-  open-vm-tools "Graphic drivers for virtual machines" off)
-
+# Select graphic driver
+graphic=$(dialog --title "ShuzzyOS" --radiolist "Please select your graphic driver." 10 38 3 \
+  "amd" "" on \
+  "nvidia" "" off \
+  "open-vm-tools" "" off 2>&1 >/dev/tty)
 response=$?
+[ "$response" -eq 1 ] && cancel
 
-[ "$response" -eq 1 ] && cancel_install
-    
-clear
-#------------------------------------------
+[[ $graphic == "amd" ]] && graphic="xf86-video-amdgpu vulkan-radeon"
+[[ $graphic == "nvidia" ]] && graphic="nvidia nvidia-utils nvidia-settings"
 
-# Needed installs
-sudo pacman -Syu --needed --noconfirm 
-sudo pacman -S --needed --noconfirm rsync git hyprland go grub sddm kitty thunar zsh waybar fastfetch swww firefox pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber nvim xdg-user-dirs jq code discord wofi
+# Confirm
+dialog --title "ShuzzyOS" --yesno "All selections have been made.\nWould you like to continue with the installation?" 6 53
+response=$?
+[ "$response" -eq 1 ] && cancel
 
-# Creating directory structure
-mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures ~/videos
+### DIALOG END ###
 
-# Cloning GitHub Repository.
-git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
+### INSTALLATION START ###
+LOGFILE=~/logfile.log
+exec 3>&1
+{
+  sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
+  echo 5; sudo pacman -S --needed --noconfirm $graphic $programs >>"$LOGFILE" 2>&1
+  echo 10; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron >>"$LOGFILE" 2>&1
 
-# Seperate choices into arrays
-read -r -a driver_array <<< "$choices_drivers"
+  echo 25; mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
+  echo 30; git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >>"$LOGFILE" 2>&1
+  echo 35; rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >>"$LOGFILE" 2>&1
+  rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/ >>"$LOGFILE" 2>&1
+  sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/ >>"$LOGFILE" 2>&1
+  xdg-user-dirs-update >>"$LOGFILE" 2>&1
 
-# Add drivers to choice
-vm=false
-for driver in "${driver_array[@]}"; do
-    [[ "$driver" == "nvidia" ]] && driver_array+=("nvidia-utils" "nvidia-settings")
-    [[ "$driver" == "amd" ]] && driver_array+=("xf86-video-amdgpu" "linux-firmware" "mesa" "vulkan-radeon")
-    [[ "$driver" == "open-vm-tools" ]] && vm=true
-done
-
-# Filter out "amd" since its not a package
-filtered=()
-for elem in "${driver_array[@]}"; do
-  if [[ "$elem" != "amd" ]]; then
-    filtered+=("$elem")
+  echo 45; source ~/git/ShuzzyOS/scripts/zsh.sh >>"$LOGFILE" 2>&1
+  echo 50; source ~/git/ShuzzyOS/scripts/font.sh >>"$LOGFILE" 2>&1
+  echo 55; source ~/git/ShuzzyOS/scripts/grub.sh >>"$LOGFILE" 2>&1
+  echo 60; source ~/git/ShuzzyOS/scripts/sddm.sh >>"$LOGFILE" 2>&1
+  echo 65; source ~/git/ShuzzyOS/scripts/yay.sh >>"$LOGFILE" 2>&1
+  echo 85; source ~/git/ShuzzyOS/scripts/wlogout.sh >>"$LOGFILE" 2>&1
+  echo 90; source ~/git/ShuzzyOS/scripts/swaylock.sh >>"$LOGFILE" 2>&1
+  echo 95
+  if [[ $graphic != "open-vm-tools" ]]; then
+    source ~/git/ShuzzyOS/scripts/vscode.sh >>"$LOGFILE" 2>&1
+  else
+    source ~/git/ShuzzyOS/scripts/vm-update.sh >>"$LOGFILE" 2>&1
   fi
-done
-driver_array=("${filtered[@]}")
+  echo 100
+} | dialog --gauge "Installing ShuzzyOS" 6 100
 
-#-------------------------------------------
-
-# Selected installs
-for driver in "${driver_array[@]}"; do
-    sudo pacman -S --needed --noconfirm "$driver" 
-done
-
-#--------------------------------------------
-# Editing Configs
-rsync -r ~/git/ShuzzyOS/config/ ~/.config/
-mkdir -p ~/pictures/wallpaper
-rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
-sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
-
-# Update paths
-xdg-user-dirs-update
-
-# z-shell
-source ~/git/ShuzzyOS/scripts/zsh.sh
-
-# font
-source ~/git/ShuzzyOS/scripts/font.sh
-
-# bootloader
-source ~/git/ShuzzyOS/scripts/grub.sh
-
-# sddm
-source ~/git/ShuzzyOS/scripts/sddm.sh
-
-# yay
-source ~/git/ShuzzyOS/scripts/yay.sh
-
-# wlogout
-source ~/git/ShuzzyOS/scripts/wlogout.sh
-
-# swaylock
-source ~/git/ShuzzyOS/scripts/swaylock.sh
-
-# vscode
-source ~/git/ShuzzyOS/scripts/vscode.sh
-
-[[ $vm ]] && source ~/git/ShuzzyOS/scripts/vm-update.sh
-
-#--------------------EXIT------------------
 reboot
