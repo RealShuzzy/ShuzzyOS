@@ -59,9 +59,9 @@ exec 3>&1
   echo 5
   sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
   echo 10
-  sudo pacman -S --needed --noconfirm "$graphic" "$programs" >>"$LOGFILE" 2>&1
+  sudo pacman -S --needed --noconfirm $graphic $programs >>"$LOGFILE" 2>&1
   echo 25
-  [[ $graphic != "open-vm-tools" ]] && sudo pacman -S "$programs_electron" >>"$LOGFILE" 2>&1
+  [[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron >>"$LOGFILE" 2>&1
   echo 30
   mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
   echo 35
