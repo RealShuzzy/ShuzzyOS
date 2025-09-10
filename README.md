@@ -3,23 +3,23 @@
 
 ## Features
 ### Core System
-- 🔧 Grub
-- 💧 Hyprland
-- 🔒 Sddm
-- 🔒 Swaylock
-- ⚙ Waybar
-- ⚙ Wlogout
+🔧 Grub
+💧 Hyprland
+🔒 Sddm
+🔒 Swaylock
+⚙ Waybar
+⚙ Wlogout
 ### Applications
-- 🗨 Discord
-- ✏ Neovim
-- 📁 Thunar
-- ✏ Visual Studio Code
-- ▶ Wofi
+🗨 Discord
+✏ Neovim
+✏ Visual Studio Code
+📁 Thunar
+▶ Wofi
 ### Package Management
-- 📦 Pacman
-- 📦 Yay
+📦 Pacman
+📦 Yay
 ### Drivers
-- 🔊 Pipewire
+🔊 Pipewire
 
 ## Install
 ### Automated
