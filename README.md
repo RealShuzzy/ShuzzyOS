@@ -1,5 +1,12 @@
 # ShuzzyOS
 !["Preview of ShuzzyOS"](assets/preview.png)
+
+## Features
+- 💧 Hyprland
+- 📁 Thunar
+- 📦 Pacman & Yay
+- 🔊 Pipewire
+
 ## Install
 ### Automated
 Run this command to start the installer:
