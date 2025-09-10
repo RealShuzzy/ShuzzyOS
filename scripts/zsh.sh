@@ -1,5 +1,3 @@
-# Z-Shell
-sudo pacman -S --needed --noconfirm zsh > /dev/null
 sudo chsh -s /usr/bin/zsh $USER
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/git/powerlevel10k
 echo 'source ~/git/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
