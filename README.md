@@ -12,6 +12,6 @@ Clone the GitHub Repository and start the script:
 This script creates folder structures, so its recommended to clone the repo under `~/git` with the original name. 
 ```
 mkdir -p ~/git
-git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/git
+git clone https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS/
 bash ~/git/ShuzzyOS/install.sh
 ```
