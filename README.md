@@ -2,8 +2,8 @@
 !["Preview of ShuzzyOS"](assets/preview.png)
 
 ## Features
-### Core System          |          Applications
-🔧 Grub                             🗨 Discord  
+### Core System
+🔧 Grub  
 💧 Hyprland  
 🔒 Sddm  
 🔒 Swaylock  
