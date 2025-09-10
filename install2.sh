@@ -1,5 +1,6 @@
 #!/bin/bash
 
+LOGFILE="~/git/ShuzzyOS/log.log"
 programs="gnu-free-fonts hyprland git rsync go grub sddm kitty nvim thunar zsh waybar fastfetch swww firefox pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq wofi"
 programs_electron="code discord"
 # Functions
@@ -53,30 +54,42 @@ response=$?
 ### DIALOG END ###
 
 ### INSTALLATION START ###
-exec >/dev/null 2>&1
 
+exec >$LOGFILE 2>&1
+{
+echo 5
 sudo pacman -Syu --needed --noconfirm
+echo 10
 sudo pacman -S --needed --noconfirm $graphic $programs
+echo 25
 [[ $graphic != "open-vm-tools" ]] && sudo pacman -S $programs_electron
-
+echo 30
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
-
+echo 35
 git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
-
+echo 40
 rsync -r ~/git/ShuzzyOS/config/ ~/.config/
 rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
 xdg-user-dirs-update
-
+echo 50
 source ~/git/ShuzzyOS/scripts/zsh.sh
+echo 53
 source ~/git/ShuzzyOS/scripts/font.sh
+echo 56
 source ~/git/ShuzzyOS/scripts/grub.sh
+echo 60
 source ~/git/ShuzzyOS/scripts/sddm.sh
+echo 65
 source ~/git/ShuzzyOS/scripts/yay.sh
+echo 85
 source ~/git/ShuzzyOS/scripts/wlogout.sh
+echo 90
 source ~/git/ShuzzyOS/scripts/swaylock.sh
+echo 95
 
 [[ $graphic != "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vscode.sh
 [[ $graphic == "open-vm-tools" ]] && source ~/git/ShuzzyOS/scripts/vm-update.sh
-
+echo 100
+} | dialog --gauge "Installing ShuzzyOS" 6 100
 echo done
