@@ -1,5 +1,3 @@
-echo "test,password in 5"
-sleep 5
 sudo chsh -s /usr/bin/zsh $USER
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/git/powerlevel10k
 echo 'source ~/git/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
