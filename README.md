@@ -11,6 +11,7 @@
 ⚙ Wlogout  
 ### Applications
 🗨 Discord  
+>_ Kitty
 ✏ Neovim  
 ✏ Visual Studio Code  
 📁 Thunar  
