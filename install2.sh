@@ -1,6 +1,6 @@
 #!/bin/bash
 
-programs="hyprland git rsync go grub sddm kitty nvim thunar zsh waybar fastfetch swww firefox pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq wofi"
+programs="gnu-free-fonts hyprland git rsync go grub sddm kitty nvim thunar zsh waybar fastfetch swww firefox pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq wofi"
 programs_electron="code discord"
 # Functions
 cancel()
