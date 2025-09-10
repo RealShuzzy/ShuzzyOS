@@ -7,6 +7,7 @@
 - ⚙ Waybar & Wlogout
 - 🔒 Sddm & Swaylock
 - 📁 Thunar
+- ▶ Wofi
 - 📦 Pacman & Yay
 - 🔊 Pipewire
 
