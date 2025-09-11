@@ -65,8 +65,8 @@ exec 3>&1
   echo 10; sudo pacman -S --needed --noconfirm $programs_system >>"$LOGFILE" 2>&1
 
   echo 15; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
-  echo 16; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
-  echo 17; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
+  echo 16; sudo pacman -S --needed --noconfirm $programs_core2 >>"$LOGFILE" 2>&1
+  echo 17; sudo pacman -S --needed --noconfirm $programs_core3 >>"$LOGFILE" 2>&1
 
   echo 20; sudo pacman -S --needed --noconfirm $programs_user >>"$LOGFILE" 2>&1
   echo 25; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron >>"$LOGFILE" 2>&1
