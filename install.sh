@@ -1,6 +1,8 @@
 #!/bin/bash
 
-programs="gnu-free-fonts hyprland git rsync go grub sddm kitty nvim thunar zsh waybar fastfetch swww firefox pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq wofi"
+programs_system="gnu-free-fonts ttf-firacode-nerd git rsync go pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq"
+programs_core="waybar wofi kitty zsh sddm hyprland swww grub"
+programs_user="nvim thunar fastfetch firefox "
 programs_electron="code discord"
 # Functions
 cancel()
@@ -57,12 +59,15 @@ LOGFILE=~/logfile.log
 exec 3>&1
 {
   sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
-  echo 5; sudo pacman -S --needed --noconfirm $graphic $programs >>"$LOGFILE" 2>&1
-  echo 10; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron >>"$LOGFILE" 2>&1
+  echo 5; sudo pacman -S --needed --noconfirm $graphic >>"$LOGFILE" 2>&1
+  echo 10; sudo pacman -S --needed --noconfirm $programs_system >>"$LOGFILE" 2>&1
+  echo 15; sudo pacman -S --needed --noconfirm $programs_core >>"$LOGFILE" 2>&1
+  echo 20; sudo pacman -S --needed --noconfirm $programs_user >>"$LOGFILE" 2>&1
+  echo 25; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron >>"$LOGFILE" 2>&1
 
-  echo 25; mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
-  echo 30; git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >>"$LOGFILE" 2>&1
-  echo 35; rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >>"$LOGFILE" 2>&1
+  echo 30; mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
+  echo 35; git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >>"$LOGFILE" 2>&1
+  echo 40; rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >>"$LOGFILE" 2>&1
   rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/ >>"$LOGFILE" 2>&1
   sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/ >>"$LOGFILE" 2>&1
   xdg-user-dirs-update >>"$LOGFILE" 2>&1
