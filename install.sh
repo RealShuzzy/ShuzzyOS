@@ -15,8 +15,6 @@ cancel()
 # Sudo verify
 echo "ShuzzyOS installer - please verify once for the entire installation."
 sudo -v
-( while true; do sudo -n true; sleep 60; done ) &
-SUDO_KEEP_ALIVE_PID=$!
 
 # Check if System is arch-based
 if ! grep -qi arch /etc/os-release 2>/dev/null; then
@@ -57,6 +55,13 @@ clear
 
 ### INSTALLATION START ###
 sudo pacman -Syu --needed --noconfirm
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
+echo -e "\033[32mSYSTEM UPDATED\033[0m"
 
 sudo pacman -S --needed --noconfirm $graphic $programs_system $programs_core
 [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron
