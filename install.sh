@@ -1,7 +1,9 @@
 #!/bin/bash
 
 programs_system="gnu-free-fonts ttf-firacode-nerd git rsync go pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq"
-programs_core="waybar wofi kitty zsh sddm hyprland swww grub"
+programs_core1="waybar wofi kitty"
+programs_core2="sddm hyprland swww"
+programs_core3="zsh grub"
 programs_user="nvim thunar fastfetch firefox "
 programs_electron="code discord"
 # Functions
@@ -61,7 +63,11 @@ exec 3>&1
   sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
   echo 5; sudo pacman -S --needed --noconfirm $graphic >>"$LOGFILE" 2>&1
   echo 10; sudo pacman -S --needed --noconfirm $programs_system >>"$LOGFILE" 2>&1
-  echo 15; sudo pacman -S --needed --noconfirm $programs_core >>"$LOGFILE" 2>&1
+
+  echo 15; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
+  echo 16; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
+  echo 17; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
+
   echo 20; sudo pacman -S --needed --noconfirm $programs_user >>"$LOGFILE" 2>&1
   echo 25; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron >>"$LOGFILE" 2>&1
 
