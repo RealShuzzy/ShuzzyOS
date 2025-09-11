@@ -55,13 +55,6 @@ clear
 
 ### INSTALLATION START ###
 sudo pacman -Syu --needed --noconfirm
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
-echo -e "\033[32mSYSTEM UPDATED\033[0m"
 
 sudo pacman -S --needed --noconfirm $graphic $programs_system $programs_core
 [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron
