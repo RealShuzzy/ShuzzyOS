@@ -1,10 +1,7 @@
 #!/bin/bash
 
 programs_system="gnu-free-fonts ttf-firacode-nerd git rsync go pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq"
-programs_core1="waybar wofi kitty"
-programs_core2="sddm hyprland swww"
-programs_core3="zsh grub"
-programs_user="nvim thunar fastfetch firefox "
+programs_core="zsh grub waybar sddm hyprland swww wofi kitty nvim thunar fastfetch firefox"
 programs_electron="code discord"
 # Functions
 cancel()
@@ -55,45 +52,34 @@ response=$?
 dialog --title "ShuzzyOS" --yesno "All selections have been made.\nWould you like to continue with the installation?" 6 53
 response=$?
 [ "$response" -eq 1 ] && cancel
-
+clear
 ### DIALOG END ###
 
 ### INSTALLATION START ###
-LOGFILE=~/logfile.log
-exec 3>&1
-{
-  sudo pacman -Syu --needed --noconfirm >>"$LOGFILE" 2>&1
-  echo 5; sudo pacman -S --needed --noconfirm $graphic >>"$LOGFILE" 2>&1
-  echo 10; sudo pacman -S --needed --noconfirm $programs_system >>"$LOGFILE" 2>&1
+sudo pacman -Syu --needed --noconfirm
 
-  echo 15; sudo pacman -S --needed --noconfirm $programs_core1 >>"$LOGFILE" 2>&1
-  echo 16; sudo pacman -S --needed --noconfirm $programs_core2 >>"$LOGFILE" 2>&1
-  echo 17; sudo pacman -S --needed --noconfirm $programs_core3 >>"$LOGFILE" 2>&1
+sudo pacman -S --needed --noconfirm $graphic $programs_system $programs_core
+[[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron
 
-  echo 20; sudo pacman -S --needed --noconfirm $programs_user >>"$LOGFILE" 2>&1
-  echo 25; [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron >>"$LOGFILE" 2>&1
+mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
+git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
+rsync -r ~/git/ShuzzyOS/config/ ~/.config/
+rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
+sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
+xdg-user-dirs-update
 
-  echo 30; mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos >>"$LOGFILE" 2>&1
-  echo 35; git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS >>"$LOGFILE" 2>&1
-  echo 40; rsync -r ~/git/ShuzzyOS/config/ ~/.config/ >>"$LOGFILE" 2>&1
-  rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/ >>"$LOGFILE" 2>&1
-  sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/ >>"$LOGFILE" 2>&1
-  xdg-user-dirs-update >>"$LOGFILE" 2>&1
+source ~/git/ShuzzyOS/scripts/zsh.sh
+source ~/git/ShuzzyOS/scripts/font.sh
+source ~/git/ShuzzyOS/scripts/grub.sh
+source ~/git/ShuzzyOS/scripts/sddm.sh
+source ~/git/ShuzzyOS/scripts/yay.sh
+source ~/git/ShuzzyOS/scripts/wlogout.sh
+source ~/git/ShuzzyOS/scripts/swaylock.sh
 
-  echo 45; source ~/git/ShuzzyOS/scripts/zsh.sh >>"$LOGFILE" 2>&1
-  echo 50; source ~/git/ShuzzyOS/scripts/font.sh >>"$LOGFILE" 2>&1
-  echo 55; source ~/git/ShuzzyOS/scripts/grub.sh >>"$LOGFILE" 2>&1
-  echo 60; source ~/git/ShuzzyOS/scripts/sddm.sh >>"$LOGFILE" 2>&1
-  echo 65; source ~/git/ShuzzyOS/scripts/yay.sh >>"$LOGFILE" 2>&1
-  echo 85; source ~/git/ShuzzyOS/scripts/wlogout.sh >>"$LOGFILE" 2>&1
-  echo 90; source ~/git/ShuzzyOS/scripts/swaylock.sh >>"$LOGFILE" 2>&1
-  echo 95
-  if [[ $graphic != "open-vm-tools" ]]; then
-    source ~/git/ShuzzyOS/scripts/vscode.sh >>"$LOGFILE" 2>&1
-  else
-    source ~/git/ShuzzyOS/scripts/vm-update.sh >>"$LOGFILE" 2>&1
-  fi
-  echo 100
-} | dialog --gauge "Installing ShuzzyOS" 6 100
+if [[ $graphic != "open-vm-tools" ]]; then
+  source ~/git/ShuzzyOS/scripts/vscode.sh
+else
+  source ~/git/ShuzzyOS/scripts/vm-update.sh
+fi
 
 reboot
