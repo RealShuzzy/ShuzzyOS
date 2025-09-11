@@ -18,6 +18,8 @@ cancel()
 # Sudo verify
 echo "ShuzzyOS installer - please verify once for the entire installation."
 sudo -v
+( while true; do sudo -n true; sleep 60; done ) &
+SUDO_KEEP_ALIVE_PID=$!
 
 # Check if System is arch-based
 if ! grep -qi arch /etc/os-release 2>/dev/null; then
