@@ -60,7 +60,7 @@ sudo pacman -S --needed --noconfirm $graphic $programs_system $programs_core
 [[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron
 
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
-git clone --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
+git clone -b dev --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
 rsync -r ~/git/ShuzzyOS/config/ ~/.config/
 rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
