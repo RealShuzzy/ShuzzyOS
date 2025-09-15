@@ -73,6 +73,7 @@ source ~/git/ShuzzyOS/scripts/sddm.sh
 source ~/git/ShuzzyOS/scripts/yay.sh
 source ~/git/ShuzzyOS/scripts/wlogout.sh
 source ~/git/ShuzzyOS/scripts/swaylock.sh
+source ~/git/ShuzzyOS/scripts/dracula.sh
 
 if [[ $graphic != "open-vm-tools" ]]; then
   source ~/git/ShuzzyOS/scripts/vscode.sh
