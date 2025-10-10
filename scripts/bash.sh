@@ -1,0 +1,1 @@
+rsync ~/git/ShuzzyOS/assets/.bashrc ~/.bashrc

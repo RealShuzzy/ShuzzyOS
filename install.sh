@@ -66,7 +66,7 @@ rsync ~/git/ShuzzyOS/assets/wallpaper.png ~/pictures/wallpaper/
 sudo rsync -r ~/git/ShuzzyOS/bin/ /bin/
 xdg-user-dirs-update
 
-source ~/git/ShuzzyOS/scripts/zsh.sh
+source ~/git/ShuzzyOS/scripts/bash.sh
 source ~/git/ShuzzyOS/scripts/font.sh
 source ~/git/ShuzzyOS/scripts/grub.sh
 source ~/git/ShuzzyOS/scripts/sddm.sh
@@ -75,7 +75,7 @@ source ~/git/ShuzzyOS/scripts/wlogout.sh
 source ~/git/ShuzzyOS/scripts/swaylock.sh
 source ~/git/ShuzzyOS/scripts/dracula.sh
 
-if [[ $graphic != "open-vm-tools" ]]; then
+if [[ $graphic != "open-vm-tools" ]]; thenB
   source ~/git/ShuzzyOS/scripts/vscode.sh
 else
   source ~/git/ShuzzyOS/scripts/vm-update.sh
