@@ -1,8 +1,8 @@
 #!/bin/bash
 
 programs_system="gnu-free-fonts ttf-firacode-nerd git rsync go npm pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq"
-programs_core="grub waybar sddm hyprland swww wofi kitty nvim thunar fastfetch firefox"
-programs_electron="code discord"
+programs_core="starship grub waybar sddm hyprland swww wofi kitty nvim thunar fastfetch firefox"
+programs_x11="code discord"
 # Functions
 cancel()
 {
@@ -57,7 +57,7 @@ clear
 sudo pacman -Syu --needed --noconfirm
 
 sudo pacman -S --needed --noconfirm $graphic $programs_system $programs_core
-[[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_electron
+[[ $graphic != "open-vm-tools" ]] && sudo pacman -S --needed --noconfirm $programs_x11
 
 mkdir -p ~/documents ~/downloads ~/git ~/music ~/pictures/wallpaper ~/videos
 git clone -b dev --recurse-submodules --depth=1 https://github.com/RealShuzzy/ShuzzyOS.git ~/git/ShuzzyOS
