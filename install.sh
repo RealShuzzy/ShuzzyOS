@@ -75,7 +75,7 @@ source ~/git/ShuzzyOS/scripts/wlogout.sh
 source ~/git/ShuzzyOS/scripts/swaylock.sh
 source ~/git/ShuzzyOS/scripts/dracula.sh
 
-if [[ $graphic != "open-vm-tools" ]]; thenB
+if [[ $graphic != "open-vm-tools" ]]; then
   source ~/git/ShuzzyOS/scripts/vscode.sh
 else
   source ~/git/ShuzzyOS/scripts/vm-update.sh
