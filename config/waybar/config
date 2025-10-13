@@ -26,13 +26,13 @@
     },
   "pulseaudio": {
     "tooltip": false,
-    "format": "{icon}    {volume}%",
+    "format": "{icon}  {volume}%",
     "format-muted": "  Muted",
     "format-icons": {
       "default": [
         "",
-        "",
-        ""
+        " ",
+        "  "
       ]
     },
     "on-click": "pavucontrol"
