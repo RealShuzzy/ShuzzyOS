@@ -1,7 +1,7 @@
 #!/bin/bash
 
 programs_system="gnu-free-fonts ttf-firacode-nerd git rsync go npm pipewire pipewire-jack pipewire-alsa pipewire-pulse wireplumber xdg-user-dirs jq"
-programs_core="zsh grub waybar sddm hyprland swww wofi kitty nvim thunar fastfetch firefox"
+programs_core="grub waybar sddm hyprland swww wofi kitty nvim thunar fastfetch firefox"
 programs_electron="code discord"
 # Functions
 cancel()
