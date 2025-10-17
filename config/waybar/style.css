@@ -63,17 +63,17 @@ button:hover {
 .modules-center {
   margin-top: 8px;
   border-radius: 30px;
-  background-color: #282a36;
+  background-color: #21222c;
 }
 
 .modules-left {
   margin: 8px 0px 0px 8px;
   border-radius: 30px;
-  background-color: #282a36;
+  background-color: #21222c;
 }
 
 .modules-right {
   margin: 8px 8px 0px 0px;
   border-radius: 30px;
-  background-color: #282a36;
+  background-color: #21222c;
 }
