@@ -44,50 +44,53 @@ There are two ways to obtain the ISO for **ShuzzyOS**:
 You can either **download it from the official website**, or **build it yourself**.
 
 ### 📥 Download
+<details>
+  <summary><strong>Download</strong></summary>
+  
+  To download the ISO, head over to the official [ShuzzyOS Download Page](https://shuzzy.duckdns.org/download).
 
-To download the ISO, head over to the official [ShuzzyOS Download Page](https://shuzzy.duckdns.org/download).
+  From there, select the ISO of your choice — the **latest version** is recommended for most users.
+</details>
+<details>
+  <summary>🛠️ Build It Yourself</summary>
 
-From there, select the ISO of your choice — the **latest version** is recommended for most users.
+  Alternatively, you can build the ISO manually.  
+  > ⚠️ **Note:** This requires an **Arch-based system**.
+  
+  #### 1. 📦 Install Required Packages
+  
+  ShuzzyOS uses the official `archiso` package to build the custom ISO:
+  
+  ```bash
+  sudo pacman -S archiso
+  ```
+  #### 2. 📁 Clone the Git Repository
+  
+  The repository contains everything you need to build, modify, and configure the ISO — including all relevant dotfiles.
+  
+  ```bash
+  git clone https://github.com/RealShuzzy/ShuzzyOS.git
+  ```
+  
+  #### 3. 🔨 Build the ISO
+  
+  Run the following commands to build the ISO:
+  
+  ```bash
+  cd ShuzzyOS
+  mkarchiso -v -w ./iso/output -o ./iso/output ./iso/baseline/
+  ```
+  
+  After the build completes, your ISO file will be located in:
+  
+  ```bash
+  ./iso/output/
+  ```
+</details>
 
----
 
-### 🛠️ Build It Yourself
-
-Alternatively, you can build the ISO manually.  
-> ⚠️ **Note:** This requires an **Arch-based system**.
-
-#### 1. 📦 Install Required Packages
-
-ShuzzyOS uses the official `archiso` package to build the custom ISO:
-
-```bash
-sudo pacman -S archiso
-```
-#### 2. 📁 Clone the Git Repository
-
-The repository contains everything you need to build, modify, and configure the ISO — including all relevant dotfiles.
-
-```bash
-git clone https://github.com/RealShuzzy/ShuzzyOS.git
-```
-
-#### 3. 🔨 Build the ISO
-
-Run the following commands to build the ISO:
-
-```bash
-cd ShuzzyOS
-mkarchiso -v -w ./iso/output -o ./iso/output ./iso/baseline/
-```
-
-After the build completes, your ISO file will be located in:
-
-```bash
-./iso/output/
-```
 
 ## 💿 Prepare the Installation
----
 
 To install **ShuzzyOS**, we need to make the ISO bootable:
 You can either use a **Ventoy** USB-Stick, or use programs **Rufus** or **Balena Etcher** to create your boot device..
