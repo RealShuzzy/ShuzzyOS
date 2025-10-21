@@ -1,4 +1,7 @@
 # 💧 ShuzzyOS
+---
+***
+___
 !["Preview of ShuzzyOS"](assets/preview.png)
 
 ## Features 
