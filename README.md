@@ -1,7 +1,4 @@
 # 💧 ShuzzyOS
----
-***
-___
 !["Preview of ShuzzyOS"](assets/preview.png)
 
 ## Features 
@@ -46,8 +43,6 @@ bash ~/git/ShuzzyOS/install.sh
 There are two ways to obtain the ISO for **ShuzzyOS**:  
 You can either **download it from the official website**, or **build it yourself**.
 
----
-
 ### 📥 Download
 
 To download the ISO, head over to the official [ShuzzyOS Download Page](https://shuzzy.duckdns.org/download).
@@ -90,5 +85,33 @@ After the build completes, your ISO file will be located in:
 ```bash
 ./iso/output/
 ```
+
+## 💿 Prepare the Installation
+---
+
+To install **ShuzzyOS**, we need to make the ISO bootable:
+You can either use a **Ventoy** USB-Stick, or use programs **Rufus** or **Balena Etcher** to create your boot device..
+
+### 💾 Ventoy
+---
+
+**Ventoy** is a great way to create a bootable USB-Stick, as it allows you to simply drag and drop your ISOs after setting it up.
+
+#### 1. 📦 Download Ventoy
+
+Go to the official [Ventoy Download Page](https://www.ventoy.net/en/download.html).
+And install whichever fits your current OS and unzip it.
+
+#### 2. 📦 Format USB-Stick with Ventoy
+
+Now execute the `Ventoy2Disk` and continue by selecting your USB-Stick and hitting `Install`.
+
+#### 3. 📦 Copy ISO onto the USB-Stick
+
+Now we can finally use the ease of Ventoy by copying the ISO to the USB-Stick.
+
+### 💾 Rufus / Balena Etcher
+---
+
 
 
