@@ -43,16 +43,17 @@ bash ~/git/ShuzzyOS/install.sh
 There are two ways to obtain the ISO for **ShuzzyOS**:  
 You can either **download it from the official website**, or **build it yourself**.
 
-### 📥 Download
 <details>
-  <summary><strong>Download</strong></summary>
+  <summary><strong>📥 Download</strong></summary>
+  test
+  > ⚠️ **Note:** This requires an **Arch-based system**.
   
   To download the ISO, head over to the official [ShuzzyOS Download Page](https://shuzzy.duckdns.org/download).
 
   From there, select the ISO of your choice — the **latest version** is recommended for most users.
 </details>
 <details>
-  <summary>🛠️ Build It Yourself</summary>
+  <summary><strong>🛠️ Build It Yourself</strong></summary>
 
   Alternatively, you can build the ISO manually.  
   > ⚠️ **Note:** This requires an **Arch-based system**.
