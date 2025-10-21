@@ -47,15 +47,21 @@ Select the ISO of your choice, the latest is recommended.
 
 ### Build
 Alternatively you can build the ISO yourself. (This requires an Arch-based system.)
-#### Packages
+#### 1. Packages
+ShuzzyOS uses the official archiso package to build the custom ISO
 ```
 sudo pacman -S archiso
 ```
 
-#### Git Repository
+#### 2. Git Repository
 This holds all the data to build and modify the iso, alongside all the dotfiles.
 ```
 git clone https://github.com/RealShuzzy/ShuzzyOS.git
 ```
-
+#### 3. Build
+```
+cd ShuzzyOS
+mkarchiso -v -w ./iso/output -o ./iso/output ./iso/baseline/
+```
+Then you will have your ISO in `./iso/output/`
 
