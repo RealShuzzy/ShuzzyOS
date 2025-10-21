@@ -107,7 +107,3 @@ You can either use a **Ventoy** USB-Stick, or use programs **Rufus** or **Balena
   
   ---
 </details>
----
-
-
-
