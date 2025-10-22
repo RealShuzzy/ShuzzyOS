@@ -8,7 +8,7 @@
     
   ### Download
     
-  > ⚠️ **Note:** Every **month** there is a new ISO, it is recommended to use the latest.
+  > ⚠️ Every **month** there is a new ISO, it is recommended to use the latest.
   
   - Download the ISO from the official [ShuzzyOS Download Page](https://shuzzy.duckdns.org/download).
 
@@ -20,7 +20,7 @@
     
   ### Build
     
-  > ⚠️ **Note:** This requires an **Arch-based system**.
+  > ⚠️ This requires an **Arch-based system**.
   
   #### 1. 📦 Install Required Packages
   
@@ -59,7 +59,7 @@
 
 ## 🔧 Creating a Bootable USB Drive
   
-> ⚠️ **Note:** Before installing **ShuzzyOS**, we need to make the **ISO bootable**.
+> ⚠️ Before installing **ShuzzyOS**, we need to make the **ISO bootable**.
   
    
 <details>
@@ -67,7 +67,7 @@
     
   ### Ventoy
     
-  > ✅ **Note: Ventoy** is a great way to create a **bootable** USB Device, simply by copying the ISO to the USB-Stick.
+  > ✅ **Ventoy** is a great way to create a **bootable** USB Device, simply by copying the ISO to the USB-Stick.
   
   #### 1. 💾 Download Ventoy
 
@@ -90,7 +90,7 @@
     
   ### Rufus (Windows)
     
-  > ⚠️ **Note: Rufus** is a lightweight **Windows-only** tool to create a **bootable** USB Device.
+  > ⚠️ **Rufus** is a lightweight **Windows-only** tool to create a **bootable** USB Device.
   
   #### 1. 💾 Download Rufus
 
@@ -104,7 +104,7 @@
   
   #### 3. ▶️ Start
 
-  > ⚠️ **Note: There is no need to change any settings.
+  > ⚠️ **There is no need to change any settings.
 
   - Select `START` and wait until Rufus is done
   
@@ -116,7 +116,7 @@
     
   ### Balena Etcher
     
-  > ✅ **Note: Balena Etcher** is a **cross-platform** tool to create a **bootable** USB Device.
+  > ✅ **Balena Etcher** is a **cross-platform** tool to create a **bootable** USB Device.
   
   #### 1. 💾 Download Balena Etcher
 
@@ -137,7 +137,7 @@
 
 ## Install
 
-> ⚠️ **Note:** A **bootable USB-Drive** with the **ShuzzyOS ISO** is needed.
+> ⚠️ A **bootable USB-Drive** with the **ShuzzyOS ISO** is needed.
 
 ### Boot to the USB-Device
 
