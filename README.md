@@ -58,8 +58,10 @@
 
 
 ## 🔧 Creating a Bootable USB Drive
-
-##### Before installing **ShuzzyOS**, we need to make the **ISO bootable**.  
+  
+> ⚠️ **Note:** Before installing **ShuzzyOS**, we need to make the **ISO bootable**.
+  
+   
 <details>
   <summary><strong>🔥 Ventoy (Recommended)</strong></summary>
     
