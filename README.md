@@ -10,7 +10,7 @@
     
   > ⚠️ Every **month** there is a new ISO, it is recommended to use the latest.
   
-  - Download the ISO from the official [ShuzzyOS Download Page](https://shuzzy.duckdns.org/download).
+  - Download the ISO from the official [ShuzzyOS Download Page](https://shuzzy.de/download).
 
   ---
 </details>
